@@ -1,8 +1,8 @@
-//  var db = require('../database/index');
-var Listing = require('../database/models/listing');
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/fetcher');
-// const db = mongoose.connection;
+var Listing = require('../database/models/Listing');
+
+/* 
+to seed database: go to file and run node listing-seeder.js
+*/
 
 const randomElement = function(array) {
   let randomIndex = Math.floor(Math.random() * array.length);
@@ -98,7 +98,7 @@ const locations = [
 let randomListing = function(){
   return [randomElement(adjectives), randomElement(nouns), randomElement(verbs), randomElement(locations)].join(' ');
 };
-let randomName = function(){
+let randomHostName = function(){
   return randomElement(names);
 }
 
@@ -109,10 +109,10 @@ let randomPrice = function() {
 let storageArr = [];
 //create array of messages data
   for (let i = 0; i < 100; i++) {
-    storageArr.push(Listing({
+    storageArr.push(new Listing({
       id: i,
       listing_name: randomListing(),
-      host_name: randomName(),
+      host_name: randomHostName(),
       listing_price: randomPrice()
     }));
 };

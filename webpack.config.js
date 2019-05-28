@@ -9,13 +9,15 @@ module.exports = {
     path: DIST_DIR
   },
   module : {
-    loaders : [
-      {
-        test : /\.jsx?/,
-        include : SRC_DIR,
-        loader : 'babel-loader',      
-        query: {
-          presets: ['react', 'es2015']
+    rules: [
+      { 
+        test: [/\.jsx$/],
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-react', '@babel/preset-env']
+          }
         }
       }
     ]
