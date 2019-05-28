@@ -6,8 +6,8 @@ mongoose.connect('mongodb://localhost/fetcher', { useNewUrlParser: true })
 const express = require('express');
 var bookingHelpers = require('../database/controllers/bookingController');
 var listingHelpers = require('../database/controllers/listingController');
-// var Listings = require('../database/models/Listing');
-// var Bookings = require('../database/models/Booking');
+var Listing = require('../database/models/Listing');
+var Booking = require('../database/models/Booking');
 
 let app = express();
 
@@ -85,13 +85,21 @@ app.get('/bookings/:id', (req, res) => {
     console.log(Array.isArray(data));
     console.log(data.length);
     console.log('BOOKING ARRAY IS: ' + data);
-    bookingHelpers.unavailableStartEndDates(data);
-    res.json(data);
+
+    let outputArr = [];
+    for (let i = 0; i < data.length; i++) {
+      let tuple = [];
+      let start = data[i].booking_start.toISOString().substring(0, 10);
+      let end = data[i].booking_end.toISOString().substring(0, 10);
+      tuple.push(start);
+      tuple.push(end);
+      outputArr.push(tuple);
+    }
+    console.log('OUTPUT IS ARRAY **** ' + outputArr);
+    res.json(outputArr);
     res.status(200);
   }));
 });
-
-
 
 
 let port = 3002;
