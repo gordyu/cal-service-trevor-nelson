@@ -1,8 +1,10 @@
-var db = require('../database/index');
-var Listing = require('../database/models/Listing');
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/fetcher');
-const db = mongoose.connection;
+// var db = require('../database/ListingModel');
+var db = require('../database/models/Listing');
+// var helper = require('../controllers/listingController');
+
+/* 
+to seed database: go to file and run node listing-seeder.js
+*/
 
 const randomElement = function(array) {
   let randomIndex = Math.floor(Math.random() * array.length);
@@ -98,7 +100,7 @@ const locations = [
 let randomListing = function(){
   return [randomElement(adjectives), randomElement(nouns), randomElement(verbs), randomElement(locations)].join(' ');
 };
-let randomName = function(){
+let randomHostName = function(){
   return randomElement(names);
 }
 
@@ -109,29 +111,29 @@ let randomPrice = function() {
 let storageArr = [];
 //create array of messages data
   for (let i = 0; i < 100; i++) {
-    storageArr.push(new Listing({
+    storageArr.push(new db.Listing({
       id: i,
       listing_name: randomListing(),
-      host_name: randomName(),
+      host_name: randomHostName(),
       listing_price: randomPrice()
     }));
 };
 
-db.deleteMany({}, (err) => {
+db.Listing.deleteMany({}, (err) => {
   if (err) {
     console.log(err);
   } else {
     console.log('database cleared');
-    db.insertMany(storageArr, (err) => {
+    db.Listing.insertMany(storageArr, (err) => {
       if (err) {
         console.log(err);
       } else {
         console.log('database seeded!') 
-        db.find({}, (err, result) => {
+        db.Listing.find({}, (err, result) => {
           if (err) {
             console.log(err);
           } else {
-            console.log(result);
+            //console.log(result);
           }
         });
       }
