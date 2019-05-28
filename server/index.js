@@ -6,8 +6,8 @@ mongoose.connect('mongodb://localhost/fetcher', { useNewUrlParser: true })
 const express = require('express');
 var bookingHelpers = require('../database/controllers/bookingController');
 var listingHelpers = require('../database/controllers/listingController');
-var Listings = require('../database/models/Listing');
-var Bookings = require('../database/models/Booking');
+// var Listings = require('../database/models/Listing');
+// var Bookings = require('../database/models/Booking');
 
 let app = express();
 
@@ -16,21 +16,9 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../public'));
 
 
-//get request for all listings
-// app.get('/listings', function(req, res) {
-//   Listings.find({}, (err, result) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       res.json(result);
-//     }
-//   }); 
-// });
-
 //get all
 app.get('/listings', (req, res) => {
   listingHelpers.getAllListings(data => {
-    console.log('I MADE IT HERE AT LEAST');
     res.json(data);
   })
 });
@@ -58,7 +46,6 @@ app.get('/bookings', (req, res) => {
     res.json(data);
   })
 });
-
 
 
 // app.post('listings', (req, res) => {
@@ -105,12 +92,7 @@ app.get('/bookings/:id', (req, res) => {
 });
 
 
-//test
-app.post('/', (req, res) => {
-  res.send('DID I MAKE IT AM I HERE ???');
-})
 
-console.log('****END OF SERVER/INDEX.JS****')
 
 let port = 3002;
 
