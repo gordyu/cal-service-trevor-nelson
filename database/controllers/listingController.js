@@ -11,10 +11,10 @@ exports.createListing = function(newListing, callback) {
   newListing.save({}, callback);
 };
 
-exports.findListingByName = function(name, callback) {
-  Listing.findOne({'listing_name': listing_name}, (err, data) => {
+exports.findListingByIdAndReturn = function(listingId, callback) {
+  Listing.findOne({'id': listingId}, (err, data) => {
     if(err) {
-      console.log(err);
+      console.log('FIND LISTING BY ID ERROR' + err);
     } else {
       callback(data);
     }
@@ -22,12 +22,14 @@ exports.findListingByName = function(name, callback) {
 };
 
 exports.getAllListings = function(callback) {
-  Listing.find(function(err, listings) {
+  Listing.find({}, (err, listings) => {
     if (err) {
-      console.log(err)
+      console.log('GET ALL LISTINGS ERROR' + err);
     } else {
-      console.log('success', listings);
+      // console.log('success', listings);
       callback(listings);
     }
   })
-}
+};
+
+
