@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-
+mongoose.connect('mongodb://localhost/fetcher', { useNewUrlParser: true })
+        .then(() => console.log('MongoDB connected...'))
+        .catch(err => console.log('error'));
 
 let listing = mongoose.Schema({
   id: {type: Number, required: true, unique: true},

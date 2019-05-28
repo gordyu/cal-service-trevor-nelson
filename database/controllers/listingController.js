@@ -11,7 +11,7 @@ exports.createListing = function(newListing, callback) {
   newListing.save({}, callback);
 };
 
-exports.findListingByIdAndReturn = function(listingId, callback) {
+exports.findListingById = function(listingId, callback) {
   Listing.findOne({'id': listingId}, (err, data) => {
     if(err) {
       console.log('FIND LISTING BY ID ERROR' + err);

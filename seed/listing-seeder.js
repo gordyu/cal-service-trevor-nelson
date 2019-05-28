@@ -1,6 +1,4 @@
-// var db = require('../database/ListingModel');
-var db = require('../database/models/Listing');
-// var helper = require('../controllers/listingController');
+var Listing = require('../database/models/Listing');
 
 /* 
 to seed database: go to file and run node listing-seeder.js
@@ -111,7 +109,7 @@ let randomPrice = function() {
 let storageArr = [];
 //create array of messages data
   for (let i = 0; i < 100; i++) {
-    storageArr.push(new db.Listing({
+    storageArr.push(new Listing({
       id: i,
       listing_name: randomListing(),
       host_name: randomHostName(),
@@ -119,17 +117,17 @@ let storageArr = [];
     }));
 };
 
-db.Listing.deleteMany({}, (err) => {
+Listing.deleteMany({}, (err) => {
   if (err) {
     console.log(err);
   } else {
     console.log('database cleared');
-    db.Listing.insertMany(storageArr, (err) => {
+    Listing.insertMany(storageArr, (err) => {
       if (err) {
         console.log(err);
       } else {
         console.log('database seeded!') 
-        db.Listing.find({}, (err, result) => {
+        Listing.find({}, (err, result) => {
           if (err) {
             console.log(err);
           } else {

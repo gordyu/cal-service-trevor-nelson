@@ -6,8 +6,8 @@ mongoose.connect('mongodb://localhost/fetcher', { useNewUrlParser: true })
 const express = require('express');
 var bookingHelpers = require('../database/controllers/bookingController');
 var listingHelpers = require('../database/controllers/listingController');
-var Listing = require('../database/models/Listing');
-var Booking = require('../database/models/Booking');
+// var Listing = require('../database/models/Listing');
+// var Booking = require('../database/models/Booking');
 
 let app = express();
 
@@ -16,31 +16,21 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../public'));
 
 
-//get all
+//get all listings
 app.get('/listings', (req, res) => {
   listingHelpers.getAllListings(data => {
     res.json(data);
   })
 });
 
-// app.get('listings/:id', (req, res) => {
-//   console.log(req.params.id);
-//   let bookingObj = listingHelpers.findListingByIdAndReturn(Number(req.params.id));
-//   console.log(bookingObj);
-//   res.send(bookingObj);
-//   res.status(200);
-// });
+//still need to fix helper function!
+app.get('/listings/:id', (req, res) => {
+  let listingObj = listingHelpers.findListingById(Number(req.params.id));
+  res.send(listingObj);
+  res.status(200);
+});
 
-// app.get('/bookings', (req, res) => {
-//   Bookings.find({}, (err, result) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       res.json(result);
-//     }
-//   });
-// });
-
+//get all bookings
 app.get('/bookings', (req, res) => {
   bookingHelpers.getAllBookings( data => {
     res.json(data);
@@ -78,6 +68,7 @@ app.get('/bookings', (req, res) => {
 // });
 
 //get all start and end dates by listing id
+//push each booking's start and end into tuple
 app.get('/bookings/:id', (req, res) => {
   console.log('REQ.PARAMS IS: ' + req.params.id);
   var bookingsArr = [];

@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "react-dev": "webpack -d --watch",
-    "seed-listings": "node ../Gloria-5ervice/seed/listing-seeder.js",
-    "seed-bookings": "node ../Gloria-5ervice/seed/booking-seeder.js",
+    "seeder-listings": "node ../Gloria5-5ervice/seed/listing-seeder.js",
+    "seeder-bookings": "node ../Gloria5-5ervice/seed/booking-seeder.js",
     "start": "nodemon --ignore node_modules server/index.js",
     "test": "mocha",
     "lint": "eslint ./"

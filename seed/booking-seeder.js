@@ -1,10 +1,10 @@
-var db = require('../database/models/Booking');
+var Booking = require('../database/models/Booking');
 
 let j = 0;
 let storageArr = [];
 for (let i = 0; i < 100; i++) {
   
-  storageArr.push(new db.Booking(
+  storageArr.push(new Booking(
     {
       id: j++,
       listing_id: i,
@@ -12,7 +12,7 @@ for (let i = 0; i < 100; i++) {
       booking_end: '2019-05-03'
   }));
 
-  storageArr.push(new db.Booking(
+  storageArr.push(new Booking(
     {
       id: j++,
       listing_id: i,
@@ -20,7 +20,7 @@ for (let i = 0; i < 100; i++) {
       booking_end: '2019-05-11'
   }));
 
-  storageArr.push(new db.Booking(
+  storageArr.push(new Booking(
     {
       id: j++,
       listing_id: i,
@@ -28,7 +28,7 @@ for (let i = 0; i < 100; i++) {
       booking_end: '2019-05-18'
   }));
 
-  storageArr.push(new db.Booking(
+  storageArr.push(new Booking(
     {
       id: j++,
       listing_id: i,
@@ -36,7 +36,7 @@ for (let i = 0; i < 100; i++) {
       booking_end: '2019-05-26'
   }));
 
-  storageArr.push(new db.Booking(
+  storageArr.push(new Booking(
     {
       id: j++,
       listing_id: i,
@@ -44,7 +44,7 @@ for (let i = 0; i < 100; i++) {
       booking_end: '2019-05-29'
   }));
 
-  storageArr.push(new db.Booking(
+  storageArr.push(new Booking(
     {
       id: j++,
       listing_id: i,
@@ -52,7 +52,7 @@ for (let i = 0; i < 100; i++) {
       booking_end: '2019-06-09'
   }));
   
-  storageArr.push(new db.Booking(
+  storageArr.push(new Booking(
     {
       id: j++,
       listing_id: i,
@@ -60,7 +60,7 @@ for (let i = 0; i < 100; i++) {
       booking_end: '2019-06-25'
   }));
 
-  storageArr.push(new db.Booking(
+  storageArr.push(new Booking(
     {
       id: j++,
       listing_id: i,
@@ -68,7 +68,7 @@ for (let i = 0; i < 100; i++) {
       booking_end: '2019-07-15'
   }));
 
-  storageArr.push(new db.Booking(
+  storageArr.push(new Booking(
     {
       id: j++,
       listing_id: i,
@@ -76,7 +76,7 @@ for (let i = 0; i < 100; i++) {
       booking_end: '2019-07-22'
   }));
 
-  storageArr.push(new db.Booking(
+  storageArr.push(new Booking(
     {
       id: j++,
       listing_id: i,
@@ -88,17 +88,17 @@ for (let i = 0; i < 100; i++) {
 
 
 
-db.Booking.deleteMany({}, (err) => {
+Booking.deleteMany({}, (err) => {
   if (err) {
     console.log(err);
   } else {
     console.log('database cleared');
-    db.Booking.insertMany(storageArr, (err) => {
+    Booking.insertMany(storageArr, (err) => {
       if (err) {
         console.log(err);
       } else {
         console.log('database seeded!') 
-        db.Booking.find({}, (err, result) => {
+        Booking.find({}, (err, result) => {
           if (err) {
             console.log(err);
           } else {
