@@ -11,3 +11,4 @@ let booking = mongoose.Schema({
 let Booking = mongoose.model('Booking', booking);
 
 module.exports = Booking;
+
