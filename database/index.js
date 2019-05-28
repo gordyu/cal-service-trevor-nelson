@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
+// var Listing = require('../models/listing');
 mongoose.connect('mongodb://localhost/fetcher', { useNewUrlParser: true })
         .then(() => console.log('MongoDB connected!'))
         .catch(err => console.log('error'));
-// var Schema = mongoose.Schema;
+var Schema = mongoose.Schema;
 
-let listingSchema = new mongoose.Schema({
+let listing = new Schema({
   id: {type: Number, required: true},
   listing_name: {type: String, required: true},
   host_name: {type: String, required: true},
@@ -12,5 +13,5 @@ let listingSchema = new mongoose.Schema({
 });
 
 
-let Listing = mongoose.model('Listing', listingSchema);
-module.exports.Listing = Listing;
+let Listing = mongoose.model('Listing', listing);
+module.exports = Listing;

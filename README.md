@@ -1,5 +1,3 @@
-# Gloria5-5ervice
+this is my readme.
 
-uh. where all the 5ervices go.
-
-feature: booking/calendar
+code stuff for calendar/booking module
