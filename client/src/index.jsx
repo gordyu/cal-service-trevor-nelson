@@ -60,19 +60,44 @@ class Booking extends React.Component {
     let endHolder = this.state.endDate;
     // this.setCurrentRoom = this.setCurrentRoom.bind(this);
     // this.updateTotal = this.updateTotal.bind(this);
-    // this.turnOff = this.turnOff.bind(this);
-    // this.toggleCalendars = this.toggleCalendars.bind(this);
-    // this.setStartDate = this.setStartDate.bind(this);
-    // this.setEndDate = this.setEndDate.bind(this);
+    this.turnOff = this.turnOff.bind(this);
+    this.toggleCalendars = this.toggleCalendars.bind(this);
+    this.setStartDate = this.setStartDate.bind(this);
+    this.setEndDate = this.setEndDate.bind(this);
     this.submitDates = this.submitDates.bind(this);
   }
 
   componentDidMount() {
-    this.initializeRoom()
+    this.initializeListing()
   }
 
-  initializeRoom() {
+  initializeListing() {
+    if (window.location.pathname === '/') {
+      fetch(`/api/listings/1/reservations`)
+      .then(response => response.json())
+      .then(response => {
+        let clone = JSON.parse(JSON.stringify(response));
+        this.setState({unfiltered: clone});
+        this.filterByDate(response);
+      })
+    } else {
+      let path = window.location.pathname;
+      fetch(`/api/listings${path}reservations`)
+      .then(response => response.json())
+      .then(response => {
+        let clone = JSON.parse(JSON.stringify(response));
+        this.setState({unfiltered: clone});
+        this.filterByDate(response);
+      })
+    }
+  }
 
+  parseDate(string) {
+    let date = string.split('-');
+    let year = date[0];
+    let month = date[1];
+    let day = date[2];
+    return new Date(year, month, day).getTime();
   }
 
   turnOff(event) {
@@ -111,7 +136,7 @@ class Booking extends React.Component {
         selectedRooms: [],
         total: 0,
       })
-      this.initializeRoom();
+      this.initializeListing();
     }
   }
   render() {
