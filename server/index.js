@@ -1,19 +1,29 @@
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/fetcher', { useNewUrlParser: true })
-        .then(() => console.log('MongoDB connected...'))
-        .catch(err => console.log('error'));
-
 const express = require('express');
 var bookingHelpers = require('../database/controllers/bookingController');
 var listingHelpers = require('../database/controllers/listingController');
-// var Listing = require('../database/models/Listing');
-// var Booking = require('../database/models/Booking');
+var Listing = require('../database/models/Listing');
+var Booking = require('../database/models/Booking');
+const db = require('../database/db.js');
+const seeder = require('../database/seeder.js');
+const app = express();
+const bodyParser = require('body-parser');
 
-let app = express();
-
-let bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../public'));
+app.use('/:id', express.static(`${__dirname}/../public`));
+
+
+// app.get('/seedDb', (req, res) => {
+//   res.send('success');
+// });
+
+// app.get('/api/listings/:listingId/reservations', (req, res) => {
+//   db.serveListing(req.params.listingId, (err, data) => {
+//     if (err) console.log('error with serving listing', err);
+//     else res.send(data);
+//   });
+// });
+
 
 
 //get all listings
@@ -23,13 +33,6 @@ app.get('/listings', (req, res) => {
   })
 });
 
-//still need to fix helper function!
-app.get('/listings/:id', (req, res) => {
-  let listingObj = listingHelpers.findListingById(Number(req.params.id));
-  res.send(listingObj);
-  res.status(200);
-});
-
 //get all bookings
 app.get('/bookings', (req, res) => {
   bookingHelpers.getAllBookings( data => {
@@ -37,34 +40,12 @@ app.get('/bookings', (req, res) => {
   })
 });
 
-
-// app.post('listings', (req, res) => {
-//   res.status(201);
-//   res.send(Listings.addOne(req.body));
-// });
-
-// //get request for all bookings
-// app.get('/bookings', function(req, res) {
-//   res.send(Bookings.getAll());
-// })
-
-// app.post('/bookings', (req, res) => {
-//   res.status(201);
-//   res.send(Bookings.addOne(req.body));
-// });
-
-//get all bookings in listing by listing_id
-// app.get('/bookings/:id', (req, res) => {
-//   console.log('REQ.PARAMS IS: ' + req.params.id);
-//   var bookingsArr = [];
-//   bookingsArr.push(bookingHelpers.getAllBookingsInListingByListingId(Number(req.params.id), data => {
-//     console.log(Array.isArray(data));
-//     console.log(data.length);
-//     console.log('BOOKING ARRAY IS: ' + data);
-//     res.json(data);
-//     res.status(200);
-//     console.log(data[0]);
-//   }));
+// //get entries at specific listing id
+// app.get('/api/listings/:listingId/documents', (req, res) => {
+//   db.serveListing(req.params.listingId, (err, data) => {
+//     if(err) console.log('oops error', err);
+//     else res.send(data);
+//   });
 // });
 
 //get all start and end dates by listing id
@@ -93,8 +74,14 @@ app.get('/bookings/:id', (req, res) => {
 });
 
 
-let port = 3002;
-
-app.listen(port, function() {
+const port = 3002;
+const server = app.listen(port, () => {
   console.log(`listening on port ${port}`);
 });
+
+setTimeout(() => server, 5000);
+
+
+
+
+module.exports = server;

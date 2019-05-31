@@ -106,6 +106,10 @@ let randomPrice = function() {
   return Math.floor(Math.random() * (1000+ 50) + 50);
 }
 
+let randomMaxGuests = function() {
+  return Math.floor(Math.random() * (5))
+}
+
 let storageArr = [];
 //create array of messages data
   for (let i = 0; i < 100; i++) {
@@ -113,6 +117,8 @@ let storageArr = [];
       id: i,
       listing_name: randomListing(),
       host_name: randomHostName(),
+      max_guests: randomMaxGuests(),
+      reservations: bookingMap[i],
       listing_price: randomPrice()
     }));
 };
