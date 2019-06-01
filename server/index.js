@@ -1,8 +1,6 @@
 const express = require('express');
 var bookingHelpers = require('../database/controllers/bookingController');
 var listingHelpers = require('../database/controllers/listingController');
-// var Listings = require('../database/models/Listing');
-// var Bookings = require('../database/models/Booking');
 const db = require('../database/db.js');
 const seeder = require('../database/seeder.js');
 const app = express();
@@ -28,8 +26,8 @@ app.get('/seedDb', (req, res) => {
 
 
 //get request for all listings
-app.get('/listings', function(req, res) {
-  Listing.find({}, (err, result) => {
+app.get('/listings', (req, res) => {
+  db.Listing.find({}, (err, result) => {
     if (err) {
       console.log(err);
     } else {
@@ -46,7 +44,7 @@ app.get('/listings', function(req, res) {
 // });
 
 app.get('/bookings', (req, res) => {
-  Booking.find({}, (err, result) => {
+  db.Booking.find({}, (err, result) => {
     if (err) {
       console.log(err);
     } else {

@@ -26,7 +26,6 @@ exports.getAllListings = function(callback) {
     if (err) {
       console.log('GET ALL LISTINGS ERROR' + err);
     } else {
-      // console.log('success', listings);
       callback(listings);
     }
   })
