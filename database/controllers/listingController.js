@@ -1,4 +1,4 @@
-var Listing = require('../models/Listing');
+var Listing = require('../db');
 
 exports.createListing = function(newListing, callback) {
   var newListing = new Listing({

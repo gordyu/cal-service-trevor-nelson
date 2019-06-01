@@ -6,7 +6,6 @@
   "scripts": {
     "react-dev": "webpack -d --watch",
     "seed": "node ./database/seeder.js",
-    "listing-seeder": "node ./seed/listing-seeder.js",
     "start": "nodemon --ignore node_modules server/index.js",
     "test": "jest --watch",
     "lint": "eslint ./"

@@ -1,8 +1,8 @@
 const express = require('express');
 var bookingHelpers = require('../database/controllers/bookingController');
 var listingHelpers = require('../database/controllers/listingController');
-var Listings = require('../database/models/Listing');
-var Bookings = require('../database/models/Booking');
+// var Listings = require('../database/models/Listing');
+// var Bookings = require('../database/models/Booking');
 const db = require('../database/db.js');
 const seeder = require('../database/seeder.js');
 const app = express();
@@ -12,12 +12,12 @@ const cors = require('cors');
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../public'));
-app.use('/:id', express.static(`${__dirname}/../public`));
+// app.use('/:id', express.static(`${__dirname}/../public`));
 
 
-// app.get('/seedDb', (req, res) => {
-//   res.send('success');
-// });
+app.get('/seedDb', (req, res) => {
+  res.send('success');
+});
 
 // app.get('/api/listings/:listingId/reservations', (req, res) => {
 //   db.serveListing(req.params.listingId, (err, data) => {
@@ -29,7 +29,7 @@ app.use('/:id', express.static(`${__dirname}/../public`));
 
 //get request for all listings
 app.get('/listings', function(req, res) {
-  Listings.find({}, (err, result) => {
+  Listing.find({}, (err, result) => {
     if (err) {
       console.log(err);
     } else {
@@ -46,7 +46,7 @@ app.get('/listings', function(req, res) {
 // });
 
 app.get('/bookings', (req, res) => {
-  Bookings.find({}, (err, result) => {
+  Booking.find({}, (err, result) => {
     if (err) {
       console.log(err);
     } else {

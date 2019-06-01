@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
 var mongoose = require('mongoose');
-var Booking = require('../database/models/Booking.js');
+var Booking = require('../database/db.js');
 
 describe('Booking Model', function () {
 

@@ -1,4 +1,4 @@
-var Booking = require('../models/Booking');
+var Booking = require('../db');
 
 exports.createBooking = function(newBooking, callback) {
   var newBooking = new Booking({

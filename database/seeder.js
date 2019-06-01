@@ -1,4 +1,4 @@
-var db = require('../database/models/Booking');
+var db = require('./db');
 
 
 let bookingMap = {};
