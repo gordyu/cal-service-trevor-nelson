@@ -23,7 +23,7 @@
 //   id: {type: Number, unique: true},
 //   listing_name: String,
 //   host_name: String,
-//   reservations: [bookingSchema],
+//   reservations: bookingSchema,
 //   daily_rate: Number
 // });
 
@@ -46,4 +46,4 @@
 // module.exports.Booking = Booking;
 // module.exports.serveListing = serveListing;
 
-// //"enzyme-adapter-react-16": "^1.13.0",
+// // //"enzyme-adapter-react-16": "^1.13.0",

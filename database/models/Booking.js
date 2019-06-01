@@ -4,14 +4,25 @@ mongoose.connect('mongodb://localhost/fetcher', { useNewUrlParser: true })
         .catch(err => console.log('error'));
 
 
-let booking = mongoose.Schema({
-  id: {type: Number, required: true, unique: true},
-  listing_id: {type: Number, required: true},
-  booking_start: {type: Date, required: true},
-  booking_end: {type: Date, required: true}
+const bookingSchema = mongoose.Schema({
+  record: Number,
+  listing_id: Number,
+  booking_start: Date,
+  booking_end: Date,
 });
 
-let Booking = mongoose.model('Booking', booking);
+const listingSchema = mongoose.Schema({
+  id: Number,
+  listing_name: String,
+  host_name: String,
+  max_guests: Number,
+  reservations: [bookingSchema],
+  listing_price: Number
+});
 
-module.exports = Booking;
+let Booking = mongoose.model('Booking', bookingSchema);
+let Listing = mongoose.model('Listing', listingSchema);
+
+module.exports.Booking = Booking;
+module.exports.Listing = Listing;
 

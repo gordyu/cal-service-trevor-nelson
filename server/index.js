@@ -1,13 +1,15 @@
 const express = require('express');
 var bookingHelpers = require('../database/controllers/bookingController');
 var listingHelpers = require('../database/controllers/listingController');
-var Listing = require('../database/models/Listing');
-var Booking = require('../database/models/Booking');
+var Listings = require('../database/models/Listing');
+var Bookings = require('../database/models/Booking');
 const db = require('../database/db.js');
 const seeder = require('../database/seeder.js');
 const app = express();
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../public'));
 app.use('/:id', express.static(`${__dirname}/../public`));
@@ -25,20 +27,40 @@ app.use('/:id', express.static(`${__dirname}/../public`));
 // });
 
 
+//get request for all listings
+app.get('/listings', function(req, res) {
+  Listings.find({}, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(result);
+    }
+  }); 
+});
 
 //get all listings
-app.get('/listings', (req, res) => {
-  listingHelpers.getAllListings(data => {
-    res.json(data);
-  })
+// app.get('/listings', (req, res) => {
+//   listingHelpers.getAllListings(data => {
+//     res.json(data);
+//   })
+// });
+
+app.get('/bookings', (req, res) => {
+  Bookings.find({}, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(result);
+    }
+  });
 });
 
 //get all bookings
-app.get('/bookings', (req, res) => {
-  bookingHelpers.getAllBookings( data => {
-    res.json(data);
-  })
-});
+// app.get('/bookings', (req, res) => {
+//   bookingHelpers.getAllBookings( data => {
+//     res.json(data);
+//   })
+// });
 
 // //get entries at specific listing id
 // app.get('/api/listings/:listingId/documents', (req, res) => {
