@@ -1,6 +1,6 @@
 const express = require('express');
-var bookingHelpers = require('../database/controllers/bookingController');
-var listingHelpers = require('../database/controllers/listingController');
+// var bookingHelpers = require('../database/controllers/bookingController');
+// var listingHelpers = require('../database/controllers/listingController');
 const db = require('../database/db.js');
 const seeder = require('../database/seeder.js');
 const app = express();
@@ -10,7 +10,7 @@ const cors = require('cors');
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../public'));
-// app.use('/:id', express.static(`${__dirname}/../public`));
+app.use('/:id', express.static(`${__dirname}/../public`));
 
 
 app.get('/seedDb', (req, res) => {
