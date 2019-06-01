@@ -23,6 +23,19 @@ const listingSchema = mongoose.Schema({
 let Booking = mongoose.model('Booking', bookingSchema);
 let Listing = mongoose.model('Listing', listingSchema);
 
+const save = (reservation) => {
+  reservation.save();
+};
+
+const serveListing = (listingId, callback) => {
+  Listing.findOne({ id: listingId }).exec((err, data) => {
+    if (err) callback(err, null);
+    else callback(null, data);
+  });
+};
+
+module.exports.save = save;
 module.exports.Booking = Booking;
 module.exports.Listing = Listing;
+module.exports.serveListing = serveListing;
 
