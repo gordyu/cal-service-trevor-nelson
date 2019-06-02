@@ -38,7 +38,7 @@ class CalDate extends React.Component {
   // }
 
   componentDidMount() {
-    console.log('DATE SHIT *** ' + this.props.clone)
+    console.log('DATE SHIT *** ' + this.props)
     let test = new Date(this.props.year, this.props.month, this.props.day)
     let test2 = '2019-05-01'
     let test3 = test2.split('T')[0]
@@ -55,7 +55,7 @@ class CalDate extends React.Component {
   // }
 
   parseDate(input) {
-    let string = '2019-05-01'.split('T')[0];
+    let string = '2019-05-05'.split('T')[0];
     let date = string.split('-');
     let year = date[0];
     let month = date[1];

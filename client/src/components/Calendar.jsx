@@ -28,7 +28,7 @@ const slideUp = keyframes`
 
 const Cal = styled.div`
     margin-top: 35px;
-    width: 300px;
+    width: 275px;
     height: 280px;
     background-color: white;
     border: 1px solid #C4C4C4;
@@ -74,6 +74,7 @@ const RightArrow = styled.div`
 
 class Calendar extends React.Component {
   constructor(props) {
+    console.log('PROPS '+ props)
     super(props)
     this.state = {
       left: false,
@@ -97,13 +98,15 @@ class Calendar extends React.Component {
   }
 
   componentDidMount() {
+
     // const date = this.props.date.split('-')
-    const date = '2019-05-01'.split('-')
+    const date = '2019-05-05'.split('-')
     const month = date[1];
     const year = date[0];
     const day = date[2];
     this.leftOrRightCalendar();
     this.getFirstDay(year, month, day);
+    console.log('CALENDAR SHIT *** ' + (this.props))
   }
 
   leftOrRightCalendar() {
