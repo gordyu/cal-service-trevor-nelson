@@ -166,6 +166,7 @@ class Reservations extends React.Component {
           <br></br>
           <StyledBody><center>Report this listing</center>
           </StyledBody>
+          <br></br>          <br></br>          <br></br>          <br></br>
         </StyledTable>
       </Container>
     )
