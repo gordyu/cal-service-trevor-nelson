@@ -133,40 +133,9 @@ class Reservations extends React.Component {
   }
 
   render() {
-    let displayStart = this.props.startDate;
+    // let displayStart = this.props.startDate;
     return (
       <Container>
-        <StyledTable>
-          <thead>
-            <Th>
-              <ListingHeader><H4>$234<StyledBody> per night</StyledBody></H4>
-              </ListingHeader>
-            </Th>
-          </thead>
-          <tr>
-            <NormalHeader><H5>Dates</H5></NormalHeader>
-            <br></br>
-            <br></br>
-
-            <NormalHeader><H5>Guests</H5></NormalHeader>
-            <br></br>
-            <br></br>
-            <br></br>
-          </tr>
-          <tr>
-          <NormalHeader>
-            <br></br>
-            <center>
-              <BookButton>Book</BookButton>
-            </center>
-          <br></br>
-          <center>You won't be charged yet</center>
-          </NormalHeader>
-          </tr>
-          <br></br>
-          <StyledBody><center>Report this listing</center>
-          </StyledBody>
-        </StyledTable>
       </Container>
     )
   }

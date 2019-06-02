@@ -191,7 +191,7 @@ let randomHostName = function(){
 }
 
 let randomPrice = function() {
-  return Math.floor(Math.random() * (1000+ 50) + 50);
+  return Math.floor(Math.random() * (300));
 }
 
 let randomMaxGuests = function() {

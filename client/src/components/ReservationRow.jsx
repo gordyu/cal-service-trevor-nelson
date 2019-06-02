@@ -8,7 +8,7 @@ const Td = styled.td`
   padding: .5rem;
 `;
 
-const DropbDown = styled.select`
+const DropDown = styled.select`
   type="text";
   position: relative;
   box-shadow: insert 0 1px 2px #484848;

@@ -141,7 +141,7 @@ const FindDisplay = styled.div`
 
 const Container = styled.div`
     display: inline-block;
-    width: 100%;
+    width: 50%;
     position:relative;
 `
 
@@ -193,44 +193,21 @@ class SearchWindow extends React.Component {
               </ListingHeader>
             </Th>
           </thead>
-          <tr>
-            <NormalHeader><H5>Dates</H5></NormalHeader>
-            <br></br>
-            <br></br>
-
-            <NormalHeader><H5>Guests</H5></NormalHeader>
-            <br></br>
-            <br></br>
-            <br></br>
-          </tr>
-          <tr>
-          <NormalHeader>
-            <br></br>
-            <center>
-              <BookButton>Book</BookButton>
-            </center>
-          <br></br>
-          <center>You won't be charged yet</center>
-          </NormalHeader>
-          </tr>
-          <br></br>
-          <StyledBody><center>Report this listing</center>
-          </StyledBody>
-
-        <BlockP>guests</BlockP>
-
-        <BlockP>dates</BlockP>
+<tr>
+<NormalHeader>
+  <H5>Dates</H5>
+  <BlockP>dates</BlockP>
           <FindDisplay>
             <DropDown>
               <InlineA id="startCal" className="nullClick" onClick={this.clickHandler}>{this.parseDate(displayStart)}</InlineA>
               { this.props.startCal ?
-              <Calendar startDate={this.props.startDate}
-                date={this.props.startDate}
-                setStartDate={this.props.setStartDate}
-                hotelRooms={this.props.hotelRooms}
-                unfiltered={this.props.unfiltered}
-              id="Calendar"/>
-                : null }
+                <Calendar startDate={this.props.startDate}
+                  date={this.props.startDate}
+                  setStartDate={this.props.setStartDate}
+                  hotelRooms={this.props.hotelRooms}
+                  bookedDates={this.props.bookedDates}
+                id="Calendar"/>
+              : null }
             </DropDown> 
           </FindDisplay>
         <InlineP> > </InlineP>
@@ -244,16 +221,44 @@ class SearchWindow extends React.Component {
                   setEndDate={this.props.setEndDate}
                   startHolder={this.props.startHolder}
                   selectedRooms={this.props.selectedRooms}
-                  unfiltered={this.props.unfiltered}
+                  bookedDates={this.props.bookedDates}
                 id="Calendar2"/>
                 : null }
             </DropDown> 
           </FindDisplay>
+</NormalHeader>
+
+</tr>
+<tr>
+  <NormalHeader>
+    <H5>Guests</H5>
+    <BlockP>guests</BlockP>
+            <FindDisplay>
+              <DropDown>
+                <InlineA></InlineA>
+              </DropDown> 
+              </FindDisplay>
+  </NormalHeader>
+
+  </tr>
+  <tr>
+  <NormalHeader>
+  <br></br>
+  <center>
+    <BookButton>Book</BookButton>
+  </center>
+  <br></br>
+  <center>You won't be charged yet</center>
+  </NormalHeader>
+  </tr>
+  <br></br>
+  <StyledBody><center>Report this listing</center>
+  </StyledBody>
           </StyledTable>
-      </Container>
-    )
-  }
-}
+        </Container>
+      )
+    }
+}  
 
 export default SearchWindow;
 
