@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Calendar from './components/Calendar.jsx';
 import { CSSTransitionGroup } from 'react-transition-group';
 import styled from 'styled-components';
+import SearchWindow from './components/SearchWindow.jsx';
 import Reservations from './components/Reservations.jsx';
-import ReservationConfirm from './components/ReservationConfirm.jsx';
 
 const Container = styled.div.attrs({
   className: 'container'
@@ -44,8 +43,8 @@ class Booking extends React.Component {
       bookedDates: {},
       // lastUnfiltered: {},
       // hotelRooms: { rooms: [] },
-      startDate: '2019-05-28',
-      endDate: '2019-05-30',
+      startDate: '2019-06-03',
+      endDate: '2019-06-10',
       startPoint: 0,
       endPoint: 0,
       currentRoom: {},
@@ -55,6 +54,7 @@ class Booking extends React.Component {
       total: 0,
       startCal: false,
       endCal: false,
+      maxGuests: 0,
     }
     let startHolder = this.state.startDate;
     let endHolder = this.state.endDate;
@@ -76,6 +76,7 @@ class Booking extends React.Component {
       fetch(`/api/listings/1/reservations`)
       .then(response => response.json())
       .then(response => {
+        console.log('RESPONSE IS ' + response)
         let clone = JSON.parse(JSON.stringify(response));
         // this.filterByDate(response);
         console.log(clone.reservations)
@@ -83,7 +84,9 @@ class Booking extends React.Component {
         console.log(clone.reservations[1].booking_start);
         var dateStrings = this.getStringBookedDates(clone.reservations);
         console.log(dateStrings)
-        this.setState({ bookedDates: dateStrings });
+        // this.setState({ bookedDates: dateStrings });
+        this.setState({ bookedDates: clone });
+
 
       })
     } else {
@@ -101,25 +104,48 @@ class Booking extends React.Component {
     // }
   }
 
+  // if (window.location.pathname === '/') {
+  //   fetch(`/api/listings/1/reservations`)
+  //   .then(response => response.json())
+  //   .then(response => {
+  //     let clone = JSON.parse(JSON.stringify(response));
+  //     // this.filterByDate(response);
+  //     console.log(clone.reservations)
+  //     console.log(clone.reservations.length)
+  //     console.log(clone.reservations[1].booking_start);
+  //     var dateStrings = this.getStringBookedDates(clone.reservations);
+  //     console.log(dateStrings)
+  //     this.setState({ bookedDates: dateStrings });
+
+  //   })
+  // } else {
+  //   console.log('listing not found could not return');
+  // }
+
   getStringBookedDates(reservationsArr) {
     var outputArr = [];
 
     for (var i = 0; i < reservationsArr.length; i++) {
       let tuple = [];
-      var starts = reservationsArr[i].booking_start.split('T')[0];
-      var ends = reservationsArr[i].booking_end.split('T')[0];
+      var starts = this.parseDate(reservationsArr[i].booking_start.split('T')[0]);
+      var ends = this.parseDate(reservationsArr[i].booking_end.split('T')[0]);
+      console.log(starts)
+      console.log(ends)
       tuple.push(starts);
       tuple.push(ends);
       outputArr.push(tuple)
     }
+    console.log('PARSED DATES ARE ' + outputArr)
     return outputArr;
   }
 
+  //puts dates into JS dates by using new Date() with string date as input
   parseDate(string) {
     let date = string.split('-');
     let year = date[0];
     let month = date[1];
     let day = date[2];
+    console.log('parsedate console log ' + year, month, day)
     return new Date(year, month, day).getTime();
   }
 
@@ -149,37 +175,51 @@ class Booking extends React.Component {
 
   setEndDate(year, month, day) {
       this.endHolder =  year + '-' + month + '-' + day;
+      console.log('endHolder is ' + this.endHolder)
   }
 
-  // submitDates() {
-  //   if(this.startHolder !== 0 && this.endHolder !== 0 && this.startHolder < this.endHolder) {
-  //     this.setState({
-  //       startDate: this.startHolder,
-  //       endDate: this.endHolder,
-  //       selectedRooms: [],
-  //       total: 0,
-  //     })
-  //     this.initializeListing();
-  //   }
-  // }
-  render() {
+  submitDates() {
+    if(this.startHolder !== 0 && this.endHolder !== 0 && this.startHolder < this.endHolder) {
+      this.setState({
+        startDate: this.startHolder,
+        endDate: this.endHolder,
+        selectedRooms: [],
+        total: 0,
+      })
+      this.initializeListing();
+    }
+  }
+  render(){
     return (
-      <Styles onClick={this.turnOff}>
-        
-        <Container>
-        <Reservations>
-        </Reservations>
-        <CalContainer>
-          <Calendar>
-          </Calendar>
-        </CalContainer>
+        <Styles onClick={this.turnOff}>
+            <Container>
+                <H2>Check Availability</H2>
+                  <Reservations>
+                  </Reservations>
+            <SearchWindow startDate={this.state.startDate}
+                    endDate={this.state.endDate}
+                    startCal={this.state.startCal}
+                    endCal={this.state.endCal}
+                    toggler={this.toggleCalendars}
+                    setStartDate={this.setStartDate}
+                    setEndDate={this.setEndDate}
+                    submitDates={this.submitDates}
+                    startHolder={this.startHolder}
+                    hotelRooms={this.state.hotelRooms}
+                    unfiltered={this.state.unfiltered}
+                    />
 
-        </Container>
-      </Styles>
+            </Container>
+        </Styles>
     )
-  }
+}
 }
 
 ReactDOM.render(<Booking />, document.getElementById('booking'));
 //        <ReservationConfirm>
 // </ReservationConfirm>
+
+{/* <CalContainer>
+<Calendar>
+</Calendar>
+</CalContainer> */}

@@ -1,7 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ReservationRow from './ReservationRow.jsx';
+import Calendar from './Calendar.jsx';
+import SearchWindow from './SearchWindow.jsx';
 import styled from 'styled-components';
+
+
+// const DropDown = styled.div`
+//   width: 100%;
+//   display: flex;
+//   flex-direction: column;
+// `
+
+const Container = styled.div`
+  display: inline-block;
+  width: 100%;
+  position: relative;
+`
+// const InlineA = styled.button`
+//     cursor: pointer;
+//     display: inline-block;
+//     width: 100%;
+//     height: 30px;
+//     background-color: white;
+//     box-shadow: inset 0 1px 2px #C4C4C4;
+//     border-radius: 3px;
+//     border: none;
+//     text-align: center;
+//     z-index: 2;
+// `
 
 const StyledTable = styled.table`
   border-collapse: collapse;
@@ -90,11 +116,26 @@ const BookButton = styled.button`
 class Reservations extends React.Component {
   constructor(props) {
     super(props);
+    this.parseDate = this.parseDate.bind(this);
+    this.clickHandler = this.clickHandler.bind(this);
+  }
+
+  parseDate(input) {
+    const yearMonthDay = '2019-01-05'.split('-');
+    let date = new Date(yearMonthDay[0], yearMonthDay[1], yearMonthDay[2]);
+
+    return date.toDateString();
+  }
+
+  clickHandler(event) {
+    event.preventDefault();
+    this.props.toggler(event);
   }
 
   render() {
+    let displayStart = this.props.startDate;
     return (
-      <div>
+      <Container>
         <StyledTable>
           <thead>
             <Th>
@@ -106,9 +147,7 @@ class Reservations extends React.Component {
             <NormalHeader><H5>Dates</H5></NormalHeader>
             <br></br>
             <br></br>
-            <br></br>
-          </tr>
-          <tr>
+
             <NormalHeader><H5>Guests</H5></NormalHeader>
             <br></br>
             <br></br>
@@ -128,7 +167,7 @@ class Reservations extends React.Component {
           <StyledBody><center>Report this listing</center>
           </StyledBody>
         </StyledTable>
-      </div>
+      </Container>
     )
   }
 }
