@@ -116,46 +116,46 @@ class CalDate extends React.Component {
 }
 
 
-  // render() {
-  //   let earliestDate = 0;
-  //   let data = this.props.bookedDates.rooms[0].room;
-  //   let lastFetchedDate = this.parseDate(data[data.length - 1].date);
-  //   if (this.props.startHolder) {
-  //     earliestDate = new Date(...this.props.startHolder.split('-'))
-  //   }
-  //   let currentDate = new Date(this.props.year, this.props.month, this.props.day);
-  //   if(currentDate > lastFetchedDate) {
-  //     this.unavailable = true;
-  //   } else {this.unavailable = false;}
-  //   if (earliestDate) {
-  //     if (currentDate <= earliestDate || currentDate > lastFetchedDate) this.unavailable = true
-  //     else this.unavailable = false;
-  //   }
-  //   if (!this.props.day) {
-  //     return (
-  //       <FlexDate className="nullClick"><Text> </Text></FlexDate>
-  //     )
-  //   }
-  //   if (this.unavailable) {
-  //     return (
-  //       <Unavailable className="nullclick" onClick={this.clickHandler}>
-  //         <Text className="nullClick">{this.props.day}</Text>
-  //       </Unavailable>
-  //     )
-  //   }
-  //   if (this.props.day === this.props.clickedDate) {
-  //     return (
-  //       <PinkDate className="nullclick" onClick={this.clickHandler}>
-  //         <Text className="nullclick">{this.props.day}</Text>
-  //       </PinkDate>
-  //     )
-  //   }
-  //   return (
-  //     <FlexDate className="nullClick" onClick={this.clickHandler}>
-  //       <Text className="nullclick">{this.props.day}</Text>
-  //     </FlexDate>
-  //   )
-  // }
+  render() {
+    let earliestDate = 0;
+    let data = this.props.bookedDates.rooms[0].room;
+    let lastFetchedDate = this.parseDate(data[data.length - 1].date);
+    if (this.props.startHolder) {
+      earliestDate = new Date(...this.props.startHolder.split('-'))
+    }
+    let currentDate = new Date(this.props.year, this.props.month, this.props.day);
+    if(currentDate > lastFetchedDate) {
+      this.unavailable = true;
+    } else {this.unavailable = false;}
+    if (earliestDate) {
+      if (currentDate <= earliestDate || currentDate > lastFetchedDate) this.unavailable = true
+      else this.unavailable = false;
+    }
+    if (!this.props.day) {
+      return (
+        <FlexDate className="nullClick"><Text> </Text></FlexDate>
+      )
+    }
+    if (this.unavailable) {
+      return (
+        <Unavailable className="nullclick" onClick={this.clickHandler}>
+          <Text className="nullClick">{this.props.day}</Text>
+        </Unavailable>
+      )
+    }
+    if (this.props.day === this.props.clickedDate) {
+      return (
+        <PinkDate className="nullclick" onClick={this.clickHandler}>
+          <Text className="nullclick">{this.props.day}</Text>
+        </PinkDate>
+      )
+    }
+    return (
+      <FlexDate className="nullClick" onClick={this.clickHandler}>
+        <Text className="nullclick">{this.props.day}</Text>
+      </FlexDate>
+    )
+  }
 
 
 export default CalDate;

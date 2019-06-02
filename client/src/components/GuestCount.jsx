@@ -19,7 +19,7 @@ const DropDown = styled.select`
   border-radius: 3px;
 `;
 
-class MaxGuests extends React.Componet {
+class GuestCount extends React.Componet {
   constructor(props) {
     super(props)
     this.state = {
@@ -35,4 +35,4 @@ class MaxGuests extends React.Componet {
   }
 }
 
-export default MaxGuests;
+export default GuestCount;
