@@ -41,9 +41,7 @@ class Booking extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      bookedDates: { reservations: [] },
-      // lastUnfiltered: {},
-      // hotelRooms: { rooms: [] },
+      bookedDates: [],
       startDate: '2019-06-3',
       endDate: '2019-06-5',
       startPoint: 0,
@@ -55,7 +53,6 @@ class Booking extends React.Component {
       total: 0,
       startCal: false,
       endCal: false,
-      maxGuests: 0,
     }
     let startHolder = this.state.startDate;
     let endHolder = this.state.endDate;
@@ -72,22 +69,29 @@ class Booking extends React.Component {
     this.initializeListing()
   }
 
+//response is the object coming in (see slack object)
+//getting listing object at id 1
+//turning into json object and cloning to send to rest of components
+
+//clone.reservations is an array of booking objects with length of 10
+  //{id: id, booking_end: isodate, booking_start: isodate, listing_id: id, booking record: 1}
+  //each listing has 10 bookings (10 start dates, 10 end dates)
+//
+
   initializeListing() {
     if (window.location.pathname === '/') {
       fetch(`/api/listings/1/reservations`)
       .then(response => response.json())
       .then(response => {
-        console.log('RESPONSE IS ' + response)
         let clone = JSON.parse(JSON.stringify(response));
         // this.filterByDate(response);
-        console.log('clone is *** ' + clone);
-        console.log('clone.reservations is ' + clone.reservations)
-        console.log(clone.reservations.length)
-        console.log('clone.reservations/booking_start of the first listing is ' + clone.reservations[1].booking_start);
-        var dateStrings = this.getStringBookedDates(clone.reservations);
-        console.log('dates as strings is ' + dateStrings)
+        var dateTuple = this.getStringBookedDates(clone.reservations);
+        console.log('EXAMPLE BOOKED TUPLE ' + dateTuple);
+        console.log(typeof dateTuple);
+        console.log(dateTuple.length)
         // this.setState({ bookedDates: dateStrings });
-        this.setState({ bookedDates: clone });
+        // this.setState({ bookedDates: clone });
+        this.setState({ bookedDates: dateTuple });
 
 
       })
@@ -125,23 +129,29 @@ class Booking extends React.Component {
   // }
 
   getStringBookedDates(reservationsArr) {
-    var outputArr = [];
-    for (var i = 0; i < reservationsArr.length; i++) {
-      let tuple = [];
-      var starts = this.parseDate(reservationsArr[i].booking_start.split('T')[0]);
-      var ends = this.parseDate(reservationsArr[i].booking_end.split('T')[0]);
-      console.log('start date: ' + starts)
-      console.log('end date: ' + ends)
-      var betweenRange = ends - starts;
-      tuple.push(starts);
-      tuple.push(ends);
-      console.log('range between end - start ' + betweenRange)
-      tuple.push(betweenRange);
-      outputArr.push(tuple)
-    }
-    console.log('PARSED DATES ARRAY IS ' + outputArr)
-    return outputArr;
+    // var outputArr = [];
+    let tuple = [];
+    var starts = reservationsArr[1].booking_start;
+    var ends = reservationsArr[1].booking_end;
+    tuple.push(starts);
+    tuple.push(ends);
+    // outputArr.push(tuple)
+    return tuple;
   }
+
+  // getStringBookedDates(reservationsArr) {
+  //   var outputArr = [];
+  //   for (var i = 0; i < reservationsArr.length; i++) {
+  //     let tuple = [];
+  //     var starts = this.parseDate(reservationsArr[i].booking_start.split('T')[0]);
+  //     var ends = this.parseDate(reservationsArr[i].booking_end.split('T')[0]);
+  //     tuple.push(starts);
+  //     tuple.push(ends);
+  //     outputArr.push(tuple)
+  //   }
+  //   return outputArr;
+  // }
+
 
   //puts dates into JS dates by using new Date() with string date as input
   // filterByDate(rawData) {
@@ -170,7 +180,7 @@ class Booking extends React.Component {
     let month = date[1];
     let day = date[2];
     console.log('dates before parseDate function are ' + year, month, day)
-    return new Date(year, month, day);
+    return new Date(year, month, day).getTime();
     // return new Date(year, month, day).getTime()
   }
 
@@ -267,7 +277,7 @@ class Booking extends React.Component {
                     submitDates={this.submitDates}
                     startHolder={this.startHolder}
                     hotelRooms={this.state.hotelRooms}
-                    unfiltered={this.state.unfiltered}
+                    bookedDates={this.state.bookedDates}
                     />
             <ReservationConfirm
                     room={this.state.currentRoom}

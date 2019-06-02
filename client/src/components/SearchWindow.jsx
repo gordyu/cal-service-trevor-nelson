@@ -201,13 +201,13 @@ class SearchWindow extends React.Component {
             <DropDown>
               <InlineA id="startCal" className="nullClick" onClick={this.clickHandler}>{this.parseDate(displayStart)}</InlineA>
               { this.props.startCal ?
-              <Calendar startDate={this.props.startDate}
-                date={this.props.startDate}
-                setStartDate={this.props.setStartDate}
-                hotelRooms={this.props.hotelRooms}
-                unfiltered={this.props.unfiltered}
-              id="Calendar"/>
-                : null }
+                <Calendar startDate={this.props.startDate}
+                  date={this.props.startDate}
+                  setStartDate={this.props.setStartDate}
+                  hotelRooms={this.props.hotelRooms}
+                  bookedDates={this.props.bookedDates}
+                id="Calendar"/>
+              : null }
             </DropDown> 
           </FindDisplay>
         <InlineP> > </InlineP>
@@ -221,7 +221,7 @@ class SearchWindow extends React.Component {
                   setEndDate={this.props.setEndDate}
                   startHolder={this.props.startHolder}
                   selectedRooms={this.props.selectedRooms}
-                  unfiltered={this.props.unfiltered}
+                  bookedDates={this.props.bookedDates}
                 id="Calendar2"/>
                 : null }
             </DropDown> 
@@ -230,42 +230,34 @@ class SearchWindow extends React.Component {
 
 </tr>
 <tr>
-<NormalHeader>
-  <H5>Guests</H5>
-  <BlockP>guests</BlockP>
-          <FindDisplay>
-            <DropDown>
-              <InlineA id="startCal" className="nullClick" onClick={this.clickHandler}>{this.parseDate(displayStart)}</InlineA>
-              { this.props.startCal ?
-              <Calendar startDate={this.props.startDate}
-                date={this.props.startDate}
-                setStartDate={this.props.setStartDate}
-                hotelRooms={this.props.hotelRooms}
-                unfiltered={this.props.unfiltered}
-              id="Calendar"/>
-                : null }
-            </DropDown> 
-            </FindDisplay>
-</NormalHeader>
+  <NormalHeader>
+    <H5>Guests</H5>
+    <BlockP>guests</BlockP>
+            <FindDisplay>
+              <DropDown>
+                <InlineA></InlineA>
+              </DropDown> 
+              </FindDisplay>
+  </NormalHeader>
 
-</tr>
-<tr>
-<NormalHeader>
-<br></br>
-<center>
-  <BookButton>Book</BookButton>
-</center>
-<br></br>
-<center>You won't be charged yet</center>
-</NormalHeader>
-</tr>
-<br></br>
-<StyledBody><center>Report this listing</center>
-</StyledBody>
-        </StyledTable>
-      </Container>
-    )
-  }
+  </tr>
+  <tr>
+  <NormalHeader>
+  <br></br>
+  <center>
+    <BookButton>Book</BookButton>
+  </center>
+  <br></br>
+  <center>You won't be charged yet</center>
+  </NormalHeader>
+  </tr>
+  <br></br>
+  <StyledBody><center>Report this listing</center>
+  </StyledBody>
+          </StyledTable>
+        </Container>
+      )
+    }
 }  
 
 export default SearchWindow;

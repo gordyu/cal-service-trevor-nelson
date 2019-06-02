@@ -16,11 +16,11 @@ const slideIn = keyframes`
 
 const slideUp = keyframes`
   0% {
-    transform: translateY(-140%);
+    transform: translateY(0%);
   }
   100% {
-    transform: translateY(0%);
-    opacity: 0%;font
+    transform: translateY(-140%);
+    opacity: 0%;
     display: none;
   }
 }
@@ -36,7 +36,6 @@ const Cal = styled.div`
     position: absolute;
     z-index: 2;
     top: 15%;
-
     ${props => !props.id && css` animation: ${slideUp} .3s linear forwards;`}
     ${props => props.id && css` animation: ${slideIn} .3s linear;`}
 `;
@@ -74,7 +73,6 @@ const RightArrow = styled.div`
 
 class Calendar extends React.Component {
   constructor(props) {
-    console.log('PROPS '+ props)
     super(props)
     this.state = {
       left: false,
@@ -99,8 +97,8 @@ class Calendar extends React.Component {
 
   componentDidMount() {
 
-    // const date = this.props.date.split('-')
-    const date = '2019-05-05'.split('-')
+    const date = this.props.date.split('-')
+    // const date = '2019-05-05'.split('-')
     const month = date[1];
     const year = date[0];
     const day = date[2];
