@@ -41,9 +41,9 @@ class Booking extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      unfiltered: {},
-      lastUnfiltered: {},
-      hotelRooms: { rooms: [] },
+      bookedDates: {},
+      // lastUnfiltered: {},
+      // hotelRooms: { rooms: [] },
       startDate: '2019-05-28',
       endDate: '2019-05-30',
       startPoint: 0,
@@ -64,7 +64,7 @@ class Booking extends React.Component {
     this.toggleCalendars = this.toggleCalendars.bind(this);
     this.setStartDate = this.setStartDate.bind(this);
     this.setEndDate = this.setEndDate.bind(this);
-    this.submitDates = this.submitDates.bind(this);
+    // this.submitDates = this.submitDates.bind(this);
   }
 
   componentDidMount() {
@@ -77,19 +77,42 @@ class Booking extends React.Component {
       .then(response => response.json())
       .then(response => {
         let clone = JSON.parse(JSON.stringify(response));
-        this.setState({unfiltered: clone});
-        this.filterByDate(response);
+        // this.filterByDate(response);
+        console.log(clone.reservations)
+        console.log(clone.reservations.length)
+        console.log(clone.reservations[1].booking_start);
+        var dateStrings = this.getStringBookedDates(clone.reservations);
+        console.log(dateStrings)
+        this.setState({ bookedDates: dateStrings });
+
       })
     } else {
-      let path = window.location.pathname;
-      fetch(`/api/listings${path}reservations`)
-      .then(response => response.json())
-      .then(response => {
-        let clone = JSON.parse(JSON.stringify(response));
-        this.setState({unfiltered: clone});
-        this.filterByDate(response);
-      })
+      console.log('listing not found could not return');
     }
+    // } else {
+    //   let path = window.location.pathname;
+    //   fetch(`/api/listings${path}reservations`)
+    //   .then(response => response.json())
+    //   .then(response => {
+    //     let clone = JSON.parse(JSON.stringify(response));
+    //     this.setState({unfiltered: clone});
+    //     this.filterByDate(response);
+    //   })
+    // }
+  }
+
+  getStringBookedDates(reservationsArr) {
+    var outputArr = [];
+
+    for (var i = 0; i < reservationsArr.length; i++) {
+      let tuple = [];
+      var starts = reservationsArr[i].booking_start.split('T')[0];
+      var ends = reservationsArr[i].booking_end.split('T')[0];
+      tuple.push(starts);
+      tuple.push(ends);
+      outputArr.push(tuple)
+    }
+    return outputArr;
   }
 
   parseDate(string) {
@@ -128,17 +151,17 @@ class Booking extends React.Component {
       this.endHolder =  year + '-' + month + '-' + day;
   }
 
-  submitDates() {
-    if(this.startHolder !== 0 && this.endHolder !== 0 && this.startHolder < this.endHolder) {
-      this.setState({
-        startDate: this.startHolder,
-        endDate: this.endHolder,
-        selectedRooms: [],
-        total: 0,
-      })
-      this.initializeListing();
-    }
-  }
+  // submitDates() {
+  //   if(this.startHolder !== 0 && this.endHolder !== 0 && this.startHolder < this.endHolder) {
+  //     this.setState({
+  //       startDate: this.startHolder,
+  //       endDate: this.endHolder,
+  //       selectedRooms: [],
+  //       total: 0,
+  //     })
+  //     this.initializeListing();
+  //   }
+  // }
   render() {
     return (
       <Styles onClick={this.turnOff}>
@@ -150,8 +173,7 @@ class Booking extends React.Component {
           <Calendar>
           </Calendar>
         </CalContainer>
-        <ReservationConfirm>
-        </ReservationConfirm>
+
         </Container>
       </Styles>
     )
@@ -159,3 +181,5 @@ class Booking extends React.Component {
 }
 
 ReactDOM.render(<Booking />, document.getElementById('booking'));
+//        <ReservationConfirm>
+// </ReservationConfirm>

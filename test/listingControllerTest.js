@@ -1,4 +1,4 @@
-var Listing = require('../database/models/Listing');
+var Listing = require('../database/db');
 var mongoose = require('mongoose');
 var expect = require('chai').expect;
 var listingHelpers = require('../database/controllers/listingController');

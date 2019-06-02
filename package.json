@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "react-dev": "webpack -d --watch",
-    "booking-seeder": "node ./seed/booking-seeder.js",
-    "listing-seeder": "node ./seed/listing-seeder.js",
+    "seed": "node ./database/seeder.js",
     "start": "nodemon --ignore node_modules server/index.js",
     "test": "jest --watch",
     "lint": "eslint ./"
@@ -31,6 +30,7 @@
     "webpack-cli": "^3.3.2"
   },
   "dependencies": {
+    "cors": "^2.8.4",
     "bluebird": "^3.3.4",
     "body-parser": "^1.17.0",
     "core-util-is": "^1.0.2",

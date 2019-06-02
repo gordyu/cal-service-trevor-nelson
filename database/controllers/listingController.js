@@ -1,4 +1,4 @@
-var Listing = require('../models/Listing');
+var Listing = require('../db');
 
 exports.createListing = function(newListing, callback) {
   var newListing = new Listing({
@@ -26,7 +26,6 @@ exports.getAllListings = function(callback) {
     if (err) {
       console.log('GET ALL LISTINGS ERROR' + err);
     } else {
-      // console.log('success', listings);
       callback(listings);
     }
   })

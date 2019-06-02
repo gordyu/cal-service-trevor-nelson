@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
 var mongoose = require('mongoose');
-var Listing = require('../database/models/Listing.js');
+var Listing = require('../database/db');
 
 describe('Listing Model', function () {
 

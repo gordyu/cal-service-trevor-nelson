@@ -30,16 +30,26 @@ class CalDate extends React.Component {
     let unavailable = false;
   }
 
+  // componentDidMount() {
+  //   let test = new Date(this.props.year, this.props.month, this.props.day)
+  //   let test2 = this.props.bookedDates
+  //   let test3 = test2.split('T')[0]
+  //   let testfin = this.parseDate(test3)
+  // }
+
   componentDidMount() {
+    console.log('DATE SHIT *** ' + this.props.clone)
     let test = new Date(this.props.year, this.props.month, this.props.day)
     let test2 = '2019-05-01'
     let test3 = test2.split('T')[0]
     let testfin = this.parseDate(test3)
+
   }
+
 
   // componentDidMount() {
   //   let test = new Date(this.props.year, this.props.month, this.props.day)
-  //   let test2 = this.props.unfiltered.rooms[0].room[this.props.unfiltered.rooms[0].room.length - 1].Date
+  //   let test2 = this.props.bookedDates.rooms[0].room[this.props.bookedDates.rooms[0].room.length - 1].Date
   //   let test3 = test2.split('T')[0]
   //   let testfin = this.parseDate(test3)
   // }
@@ -108,7 +118,7 @@ class CalDate extends React.Component {
 
   // render() {
   //   let earliestDate = 0;
-  //   let data = this.props.unfiltered.rooms[0].room;
+  //   let data = this.props.bookedDates.rooms[0].room;
   //   let lastFetchedDate = this.parseDate(data[data.length - 1].date);
   //   if (this.props.startHolder) {
   //     earliestDate = new Date(...this.props.startHolder.split('-'))
