@@ -78,6 +78,9 @@ const BookButton = styled.button`
   font-weight: bold;
   margin-left: 0%;
   align: center;
+  &:focus {
+    border-color: #ffffff; 
+    outline: none !important;
 `
 
 
@@ -119,7 +122,7 @@ const InlineA = styled.button`
     border-radius: 3px;
     border: none;
     text-align: center;
-    z-index: 2;
+    z-index: 0;
 `
 
 const StyledTable = styled.table`
@@ -146,6 +149,7 @@ const DropDown = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
+    z-index: 0;
 `
 
 const FindButton = styled.button`
