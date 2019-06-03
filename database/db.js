@@ -8,7 +8,7 @@ const bookingSchema = mongoose.Schema({
   record: Number,
   listing_id: Number,
   booking_start: Date,
-  booking_end: Date,
+  booking_end: Date
 });
 
 const listingSchema = mongoose.Schema({

@@ -28,7 +28,7 @@ const H2= styled.h2`
 `
 
 const Styles=styled.div`
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'MontrealRegular', sans-serif;
   font-weight: bold;
   width: 100%; 
   font-color: #484848;
@@ -42,8 +42,8 @@ class Booking extends React.Component {
     super(props);
     this.state = {
       bookedDates: [],
-      startDate: '2019-06-3',
-      endDate: '2019-06-5',
+      startDate: '2019-05-3',
+      endDate: '2019-05-5',
       startPoint: 0,
       endPoint: 0,
       currentReservation: {},
@@ -86,11 +86,11 @@ initializeListing() {
       let clone = JSON.parse(JSON.stringify(response));
       // let stringifiedClone = (JSON.stringify(response));
       console.log(clone.reservations)
-      var dateTuple = this.getStringBookedDates(clone.reservations);
-      console.log('EXAMPLE BOOKED TUPLE ' + dateTuple);
-      console.log(typeof dateTuple);
-      console.log(dateTuple.length)
-      this.setState({ bookedDates: dateTuple })
+      var dateRange = this.getDaysInBetween(clone.reservations);
+      console.log('EXAMPLE BOOKED TUPLE ' + dateRange);
+      console.log(typeof dateRange);
+      console.log(dateRange.length)
+      this.setState({ bookedDates: dateRange })
     })
 }
 
@@ -127,9 +127,6 @@ initializeListing() {
   // }
 
 
-
-
-
   // if (window.location.pathname === '/') {
   //   fetch(`/api/listings/1/reservations`)
   //   .then(response => response.json())
@@ -148,51 +145,20 @@ initializeListing() {
   //   console.log('listing not found could not return');
   // }
 
-  getStringBookedDates(reservationsArr) {
+  getDaysInBetween(reservationsArr) {
     // var outputArr = [];
     let tuple = [];
-    var starts = reservationsArr[1].booking_start;
-    var ends = reservationsArr[1].booking_end;
+    console.log('before millisecond conversion ' + reservationsArr[1].booking_start + 3)
+    var starts = this.parseDate(reservationsArr[1].booking_start.split('T')[0]);
+    var ends = this.parseDate(reservationsArr[1].booking_end.split('T')[0])
+    var days = 1000 * 60 * 60 * 24 * reservationsArr[1].booking_duration;
+    console.log('days after start in milliseconds is ' + days);
     tuple.push(starts);
     tuple.push(ends);
-    // outputArr.push(tuple)
+    console.log('TUPLES IN MILLISECONDS ' + tuple);
     return tuple;
   }
 
-  // getStringBookedDates(reservationsArr) {
-  //   var outputArr = [];
-  //   for (var i = 0; i < reservationsArr.length; i++) {
-  //     let tuple = [];
-  //     var starts = this.parseDate(reservationsArr[i].booking_start.split('T')[0]);
-  //     var ends = this.parseDate(reservationsArr[i].booking_end.split('T')[0]);
-  //     tuple.push(starts);
-  //     tuple.push(ends);
-  //     outputArr.push(tuple)
-  //   }
-  //   return outputArr;
-  // }
-
-
-  //puts dates into JS dates by using new Date() with string date as input
-  // filterByDate(rawData) {
-  //   const startDateList = rawData.reservations[0].booking_start;
-  //   const endDateList = rawData.reservations[0].booking_end;
-  //   startDateList.forEach((data, index) => {
-  //     const date = data.date.split('T')[0];
-  //     if(this.parseDate(date) === this.parseDate
-  //     (this.state.startDate)) {
-  //       this.setState({ startPoint: index});
-  //     } else if (this.parse(date) === this.parseDate
-  //     (this.state.endDate)) {
-  //       this.setState({ endPoint: index });
-  //     }
-  //   })
-  //   const reservationsList = rawData.reservations;
-  //   reservatsionsList.map((reservations, index) => {
-  //     reservations = reservations.slice(this.state.startPoint, this.state.endPoint + 1)
-  //   });
-  //   this.setState({ bookedDates: {reservations: reservationsList}});
-  // }
 
   parseDate(string) {
     let date = string.split('-');
@@ -201,7 +167,6 @@ initializeListing() {
     let day = date[2];
     console.log('dates before parseDate function are ' + year, month, day)
     return new Date(year, month, day).getTime();
-    // return new Date(year, month, day).getTime()
   }
 
 
@@ -284,7 +249,7 @@ initializeListing() {
     return (
         <Styles onClick={this.turnOff}>
             <Container>
-                <H2>Check Availability</H2>
+
                   <Reservations>
                   </Reservations>
             <SearchWindow startDate={this.state.startDate}
