@@ -78,37 +78,57 @@ class Booking extends React.Component {
   //each listing has 10 bookings (10 start dates, 10 end dates)
 //
 
-  initializeListing() {
-    if (window.location.pathname === '/') {
-      fetch(`/api/listings/1/reservations`)
-      .then(response => response.json())
-      .then(response => {
-        let clone = JSON.parse(JSON.stringify(response));
-        // this.filterByDate(response);
-        var dateTuple = this.getStringBookedDates(clone.reservations);
-        console.log('EXAMPLE BOOKED TUPLE ' + dateTuple);
-        console.log(typeof dateTuple);
-        console.log(dateTuple.length)
-        // this.setState({ bookedDates: dateStrings });
-        // this.setState({ bookedDates: clone });
-        this.setState({ bookedDates: dateTuple });
+initializeListing() {
+    fetch(`/api/listings/1/reservations`)
+    .then(response => response.json())
+    .then(response => {
+      console.log(JSON.stringify(response))
+      let clone = JSON.parse(JSON.stringify(response));
+      // let stringifiedClone = (JSON.stringify(response));
+      console.log(clone.reservations)
+      var dateTuple = this.getStringBookedDates(clone.reservations);
+      console.log('EXAMPLE BOOKED TUPLE ' + dateTuple);
+      console.log(typeof dateTuple);
+      console.log(dateTuple.length)
+      this.setState({ bookedDates: dateTuple })
+    })
+}
+
+  // initializeListing() {
+  //   if (window.location.pathname === '/') {
+  //     fetch(`127.0.0.1:3002/api/listings/1/reservations`)
+  //     .then(response => response.json())
+  //     .then(response => {
+  //       let clone = JSON.parse(JSON.stringify(response));
+  //       // this.filterByDate(response);
+  //       var dateTuple = this.getStringBookedDates(clone.reservations);
+  //       console.log('EXAMPLE BOOKED TUPLE ' + dateTuple);
+  //       console.log(typeof dateTuple);
+  //       console.log(dateTuple.length)
+  //       // this.setState({ bookedDates: dateStrings });
+  //       // this.setState({ bookedDates: clone });
+  //       this.setState({ bookedDates: dateTuple });
 
 
-      })
-    } else {
-      console.log('listing not found could not return');
-    }
-    // } else {
-    //   let path = window.location.pathname;
-    //   fetch(`/api/listings${path}reservations`)
-    //   .then(response => response.json())
-    //   .then(response => {
-    //     let clone = JSON.parse(JSON.stringify(response));
-    //     this.setState({unfiltered: clone});
-    //     this.filterByDate(response);
-    //   })
-    // }
-  }
+  //     })
+  //   } else {
+  //     console.log('listing not found could not return');
+  //   }
+  //   // } else {
+  //   //   let path = window.location.pathname;
+  //   //   fetch(`/api/listings${path}reservations`)
+  //   //   .then(response => response.json())
+  //   //   .then(response => {
+  //   //     let clone = JSON.parse(JSON.stringify(response));
+  //   //     this.setState({unfiltered: clone});
+  //   //     this.filterByDate(response);
+  //   //   })
+  //   // }
+  // }
+
+
+
+
 
   // if (window.location.pathname === '/') {
   //   fetch(`/api/listings/1/reservations`)
@@ -276,14 +296,13 @@ class Booking extends React.Component {
                     setEndDate={this.setEndDate}
                     submitDates={this.submitDates}
                     startHolder={this.startHolder}
-                    hotelRooms={this.state.hotelRooms}
                     bookedDates={this.state.bookedDates}
                     />
             <ReservationConfirm
                     room={this.state.currentRoom}
-                    beds={this.state.numberOfBeds}
+                    guests={this.state.numberOfGuests}
                     average={this.state.averagePrice}
-                    selected={this.state.selectedRooms}
+                    selected={this.state.selectedDates}
                     total={this.state.toal}/>
             </Container>
         </Styles>
