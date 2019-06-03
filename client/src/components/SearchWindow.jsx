@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import Calendar from './Calendar.jsx';
 import GuestCounter from './GuestCounter.jsx';
+import ReservationConfirm from './ReservationConfirm.jsx';
 import styled from 'styled-components';
 
 
@@ -12,13 +13,13 @@ const StyledBody = styled.tbody`
 `;
 
 const Td = styled.td`
-  border: 1px solid #d3d3d3;
+
   white-space: nowrap;
   padding: .7rem;
 `;
 
 const Th = styled.th`
-  border: 1px solid #d3d3d3;
+
   white-space: nowrap;
   padding: .7rem;
 `;
@@ -36,7 +37,7 @@ const ListingHeader = styled.th`
 `;
 
 const NormalHeader = styled.th`
-  border: 1px solid #d3d3d3;
+
   font-size: 9px;
   white-space: nowrap;
   padding: .7rem;
@@ -46,7 +47,7 @@ const NormalHeader = styled.th`
 `;
 
 const LargeHeader = styled.th`
-  border: 1px solid #d3d3d3;
+
   white-space: nowrap;
   padding: .7rem;
   min-width: 150px;
@@ -60,9 +61,8 @@ const H4 = styled.h4`
 `;
 
 const H5 = styled.h5`
-  color: #484848;
+
   font-size: 9px;
-  font-weight: bold;
   margin: .7rem;
 `;
 
@@ -95,7 +95,7 @@ const BookButton = styled.button`
 
 
 const InlineP = styled.p`
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'MontrealRegular', sans-serif;
     font-size: 9px;
     display: inline-block;
     text-align: center;
@@ -104,7 +104,7 @@ const InlineP = styled.p`
 `
 
 const BlockP = styled.p`
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'MontrealRegular', sans-serif;
     font-size: 9px;
     display: block;
     text-align: left;
@@ -143,9 +143,14 @@ const Container = styled.div`
     display: inline-block;
     width: 50%;
     position:relative;
+    border: 1px solid #d3d3d3;
+    border-radius: 0px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 `
 
 const DropDown = styled.div`
+    font-family: 'MontrealRegular', sans-serif;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -190,7 +195,7 @@ class SearchWindow extends React.Component {
         <StyledTable>
         <thead>
             <Th>
-              <ListingHeader><H4>$234<StyledBody> per night</StyledBody></H4>
+              <ListingHeader><H4>$234</H4><StyledBody> per night</StyledBody>
               </ListingHeader>
             </Th>
           </thead>
@@ -241,19 +246,21 @@ class SearchWindow extends React.Component {
   </tr>
   <tr>
   <NormalHeader>
-  <br></br>
+    <ReservationConfirm>
+    </ReservationConfirm>
   <center>
     <BookButton>Book</BookButton>
   </center>
   <br></br>
-  <center>You won't be charged yet</center>
+  <center><StyledBody>You won't be charged yet</StyledBody></center>
   </NormalHeader>
   </tr>
   <br></br>
-  <StyledBody><center>Report this listing</center>
-  </StyledBody>
-          </StyledTable>
-        </Container>
+  </StyledTable>
+          </Container>
+
+
+
       )
     }
 }  
@@ -261,3 +268,5 @@ class SearchWindow extends React.Component {
 export default SearchWindow;
 
 // <FindButton id="submit" onClick={this.props.submitDates}>Find</FindButton>
+{/* <StyledBody><center>Report this listing</center>
+</StyledBody> */}

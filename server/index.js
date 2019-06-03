@@ -17,7 +17,6 @@ app.get('/seedDb', (req, res) => {
 
 //gets all reservations at a specific listing id!
 app.get('/api/listings/:listingId/reservations', (req, res) => {
-  console.log('************************** SEE MEE YOU MADE IT ***********************')
   db.serveListing(req.params.listingId, (err, data) => {
     if (err) console.log('error with serving listing', err);
     else res.send(data);

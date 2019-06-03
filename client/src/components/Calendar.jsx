@@ -192,7 +192,6 @@ class Calendar extends React.Component {
           clickDate={this.clickDate}
           clickedDate={this.state.clickedDate}
           startHolder={this.props.startHolder}
-          hotelRooms={this.props.hotelRooms}
           bookedDates={this.props.bookedDates}
         />)}
         </FlexCal>
@@ -203,19 +202,3 @@ class Calendar extends React.Component {
 
 export default Calendar;
 
-// {this.state.days.map((item, index) =>
-//   <CalDate key={index}
-//     id={this.props.id}
-//     day={item - this.state.firstDay}
-//     month={this.state.currentMonth}
-//     year={this.state.currentYear}
-//     setStartDate={this.props.setStartDate}
-//     setEndDate={this.props.setEndDate}
-//     dateSelected={this.state.clicked}
-//     oneClick={this.oneClick}
-//     clickDate={this.clickDate}
-//     clickedDate={this.state.clickedDate}
-//     startHolder={this.props.startHolder}
-//     hotelRooms={this.props.hotelRooms}
-//     bookedDates={this.props.bookedDates}
-//   />)}

@@ -1,8 +1,13 @@
 var db = require('./db');
 
 
+let randomDays = function() {
+  return (Math.floor(Math.random() * (10 - 1) + 1));
+}
+
 let bookingMap = {};
 let j = 0;
+
 
 for (let i = 0; i < 100; i++) {
   let storageArr = [];
@@ -11,63 +16,63 @@ for (let i = 0; i < 100; i++) {
       record: j++,
       listing_id: i,
       booking_start: '2019-05-01',
-      booking_end: '2019-05-03'
+      booking_end: '2019-05-08'
   }));
 
   storageArr.push(new db.Booking(
     {
       record: j++,
       listing_id: i,
-      booking_start: '2019-05-08',
-      booking_end: '2019-05-11'
+      booking_start: '2019-06-08',
+      booking_end: '2019-06-11'
   }));
 
   storageArr.push(new db.Booking(
     {
       record: j++,
       listing_id: i,
-      booking_start: '2019-05-14',
-      booking_end: '2019-05-18'
+      booking_start: '2019-08-14',
+      booking_end: '2019-08-18'
   }));
 
   storageArr.push(new db.Booking(
     {
       record: j++,
       listing_id: i,
-      booking_start: '2019-05-24',
-      booking_end: '2019-05-26'
+      booking_start: '2019-06-24',
+      booking_end: '2019-06-27'
   }));
 
   storageArr.push(new db.Booking(
     {
       record: j++,
       listing_id: i,
-      booking_start: '2019-05-28',
-      booking_end: '2019-05-29'
+      booking_start: '2019-09-28',
+      booking_end: '2019-09-29'
   }));
 
   storageArr.push(new db.Booking(
     {
       record: j++,
       listing_id: i,
-      booking_start: '2019-06-04',
-      booking_end: '2019-06-09'
+      booking_start: '2019-10-04',
+      booking_end: '2019-14-04'
   }));
   
   storageArr.push(new db.Booking(
     {
       record: j++,
       listing_id: i,
-      booking_start: '2019-06-17',
-      booking_end: '2019-06-25'
+      booking_start: '2019-02-17',
+      booking_end: '2019-02-20'
   }));
 
   storageArr.push(new db.Booking(
     {
       record: j++,
       listing_id: i,
-      booking_start: '2019-07-10',
-      booking_end: '2019-07-15'
+      booking_start: '2019-09-10',
+      booking_end: '2019-09-14'
   }));
 
   storageArr.push(new db.Booking(
@@ -75,15 +80,15 @@ for (let i = 0; i < 100; i++) {
       record: j++,
       listing_id: i,
       booking_start: '2019-07-19',
-      booking_end: '2019-07-22'
+      booking_end: '2019-07-25'
   }));
 
   storageArr.push(new db.Booking(
     {
       record: j++,
       listing_id: i,
-      booking_start: '2019-07-24',
-      booking_end: '2019-07-30'
+      booking_start: '2019-04-24',
+      booking_end: '2019-04-26'
   }));
 
   // let curId = i.toString();
@@ -195,7 +200,7 @@ let randomPrice = function() {
 }
 
 let randomMaxGuests = function() {
-  return Math.floor(Math.random() * (5))
+  return (Math.floor(Math.random() * (10 - 1) + 1));
 }
 
 let storageArr = [];

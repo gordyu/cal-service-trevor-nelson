@@ -54,13 +54,13 @@ class GuestCounter extends React.Component {
   }
 
   incrementCount() {
-    if(this.state.count < 7){
+    if(this.state.count < 10){
       this.setState(prevState => ({count: prevState.count + 1}))
     }
   }
 
   decrementCount() {
-    if(this.state.count > 0){
+    if(this.state.count > 1){
       this.setState(prevState => ({count: prevState.count - 1}))
     }
   }
