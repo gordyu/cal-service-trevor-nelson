@@ -1,6 +1,4 @@
 const express = require('express');
-// var bookingHelpers = require('../database/controllers/bookingController');
-// var listingHelpers = require('../database/controllers/listingController');
 const db = require('../database/db.js');
 const seeder = require('../database/seeder.js');
 const app = express();
@@ -36,12 +34,6 @@ app.get('/listings', (req, res) => {
   }); 
 });
 
-//get all listings
-// app.get('/listings', (req, res) => {
-//   listingHelpers.getAllListings(data => {
-//     res.json(data);
-//   })
-// });
 
 app.get('/bookings', (req, res) => {
   db.Booking.find({}, (err, result) => {
@@ -52,46 +44,6 @@ app.get('/bookings', (req, res) => {
     }
   });
 });
-
-//get all bookings
-// app.get('/bookings', (req, res) => {
-//   bookingHelpers.getAllBookings( data => {
-//     res.json(data);
-//   })
-// });
-
-// //get entries at specific listing id
-// app.get('/api/listings/:listingId/documents', (req, res) => {
-//   db.serveListing(req.params.listingId, (err, data) => {
-//     if(err) console.log('oops error', err);
-//     else res.send(data);
-//   });
-// });
-
-//get all start and end dates by listing id
-//push each booking's start and end into tuple
-// app.get('/bookings/:id', (req, res) => {
-//   console.log('REQ.PARAMS IS: ' + req.params.id);
-//   var bookingsArr = [];
-//   bookingsArr.push(bookingHelpers.getAllBookingsInListingByListingId(Number(req.params.id), data => {
-//     console.log(Array.isArray(data));
-//     console.log(data.length);
-//     console.log('BOOKING ARRAY IS: ' + data);
-
-//     let outputArr = [];
-//     for (let i = 0; i < data.length; i++) {
-//       let tuple = [];
-//       let start = data[i].booking_start.toISOString().substring(0, 10);
-//       let end = data[i].booking_end.toISOString().substring(0, 10);
-//       tuple.push(start);
-//       tuple.push(end);
-//       outputArr.push(tuple);
-//     }
-//     console.log('OUTPUT IS ARRAY **** ' + outputArr);
-//     res.json(outputArr);
-//     res.status(200);
-//   }));
-// });
 
 
 const port = 3002;

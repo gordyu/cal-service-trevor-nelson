@@ -25,14 +25,24 @@ class GuestCount extends React.Componet {
     this.state = {
       value: 0,
     }
-    this.minNum = this.minNum.bind(this);
+    this.guestNumDisplay = this.guestNumDisplay.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.maxNum = this.average.bind(this);
   }
 
   minNum() {
     //get number from getrequest via listing.listing_price
   }
+
+  guestNumDisplay(num) {
+    return num.reduce((a, b) => {
+      if (!a) return b.guestsLeft;
+      if (!)
+    })
+  }
+
+
+
+
 }
 
 export default GuestCount;
