@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import Calendar from './Calendar.jsx';
+import GuestCounter from './GuestCounter.jsx';
 import styled from 'styled-components';
 
 
@@ -129,12 +130,8 @@ const StyledTable = styled.table`
   border 1px #d3d3d3;
 `
 
-const FindDisplayGuest = styled.div`
-    display: block;
-    width:25%
-`
-
 const FindDisplay = styled.div`
+    margin: .7rem;
     display: inline-block;
     width:25%
 `
@@ -196,7 +193,6 @@ class SearchWindow extends React.Component {
 <tr>
 <NormalHeader>
   <H5>Dates</H5>
-  <BlockP>dates</BlockP>
           <FindDisplay>
             <DropDown>
               <InlineA id="startCal" className="nullClick" onClick={this.clickHandler}>{this.parseDate(displayStart)}</InlineA>
@@ -232,11 +228,9 @@ class SearchWindow extends React.Component {
 <tr>
   <NormalHeader>
     <H5>Guests</H5>
-    <BlockP>guests</BlockP>
             <FindDisplay>
-              <DropDown>
-                <InlineA></InlineA>
-              </DropDown> 
+                  <GuestCounter>
+                  </GuestCounter>
               </FindDisplay>
   </NormalHeader>
 
