@@ -1,6 +1,6 @@
 # Project Name
 
-> This service renders the photo carousel portion of Airbnb 'homes' page. On photo mouseover the images should gain focus. Upon clicking any photo it will bring up the carousel allowing users to scroll through the gallery. Images can also be favorited and shared to social media.
+> This service renders the calendar/booking portion of Airbnb 'homes' page. The calendar is janky (just wanted to see if I could build a calendar from scratch: spoiler alert, I cannot), and the real meat of this is really the database/schema (Bookings is nested in Listings :o).
 
 ## Related Projects
 
