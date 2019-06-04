@@ -38,13 +38,6 @@ class CalDate extends React.Component {
     // let unavailable = false;
   }
 
-  // componentDidMount() {
-  //   let test = new Date(this.props.year, this.props.month, this.props.day)
-  //   let test2 = this.props.bookedDates[0];
-  //   let test3 = test2.split('T')[0]
-  //   let testfin = this.parseDate(test3)
-  //   console.log('what is this shit *** bookedDates[0] ' + test2 + testfin)
-  // }
 
   parseDate(input) {
     let string = input.split('T')[0];
@@ -64,19 +57,21 @@ class CalDate extends React.Component {
     this.props.oneClick();
   }
 
+//this is kind of a shit show .. was what i was working on right up until presentations lmao
+
   render() {
     console.log('TEST TEST TEST ' + new Date(this.props.bookedDates[0]).toISOString().split('T')[0])
     console.log('INFO COMING IN FROM INDEX IS ' + this.props.bookedDates[0], this.props.bookedDates[1])
     let earliestDate = 0;
-    //THIS IS A STRING FOR TESTING PURPOSES!!!! GET ELEMENTS FROM ARRAY LATER
+    //OFFICIAL TESTING TAKING PLACE MESSING AROUND WITH TYPES AND MANIPULATING THEM
     let data = new Date(this.props.bookedDates[0]).toISOString().split('T')[0];
     let endData = new Date(this.props.bookedDates[1]).toISOString().split('T')[0];
     // let daysAfter = (this.props.bookedDates[1] / (1000 * 60 * 60 * 24));
     // console.log('DAYS THAT NEED TO BE BLOCKED AFTER ' + daysAfter)
-    //THIS IS A STRING FOR TESTING PURPOSES!!!!
+    //TEST SITE
 
     let lastFetchedDate = this.parseDate(data);
-    console.log('THIS IS THE DATE THAT GETS UNAVAILABLE ' + lastFetchedDate)
+    console.log('THIS IS THE DATE THAT GETS UNAVAILABLE?? ' + lastFetchedDate)
 
     console.log(this.props.startHolder)
     if (this.props.startHolder) {

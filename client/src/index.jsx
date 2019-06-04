@@ -4,7 +4,7 @@ import { CSSTransitionGroup } from 'react-transition-group';
 import styled from 'styled-components';
 import SearchWindow from './components/SearchWindow.jsx';
 import ReservationConfirm from './components/ReservationConfirm.jsx';
-import Reservations from './components/Reservations.jsx';
+
 
 const Container = styled.div.attrs({
   className: 'container'
@@ -57,7 +57,7 @@ class Booking extends React.Component {
     let startHolder = this.state.startDate;
     let endHolder = this.state.endDate;
     this.setCurrentReservation = this.setCurrentReservation.bind(this);
-    this.updateTotal = this.updateTotal.bind(this);
+    // this.updateTotal = this.updateTotal.bind(this);
     this.turnOff = this.turnOff.bind(this);
     this.toggleCalendars = this.toggleCalendars.bind(this);
     this.setStartDate = this.setStartDate.bind(this);
@@ -94,56 +94,6 @@ initializeListing() {
     })
 }
 
-  // initializeListing() {
-  //   if (window.location.pathname === '/') {
-  //     fetch(`127.0.0.1:3002/api/listings/1/reservations`)
-  //     .then(response => response.json())
-  //     .then(response => {
-  //       let clone = JSON.parse(JSON.stringify(response));
-  //       // this.filterByDate(response);
-  //       var dateTuple = this.getStringBookedDates(clone.reservations);
-  //       console.log('EXAMPLE BOOKED TUPLE ' + dateTuple);
-  //       console.log(typeof dateTuple);
-  //       console.log(dateTuple.length)
-  //       // this.setState({ bookedDates: dateStrings });
-  //       // this.setState({ bookedDates: clone });
-  //       this.setState({ bookedDates: dateTuple });
-
-
-  //     })
-  //   } else {
-  //     console.log('listing not found could not return');
-  //   }
-  //   // } else {
-  //   //   let path = window.location.pathname;
-  //   //   fetch(`/api/listings${path}reservations`)
-  //   //   .then(response => response.json())
-  //   //   .then(response => {
-  //   //     let clone = JSON.parse(JSON.stringify(response));
-  //   //     this.setState({unfiltered: clone});
-  //   //     this.filterByDate(response);
-  //   //   })
-  //   // }
-  // }
-
-
-  // if (window.location.pathname === '/') {
-  //   fetch(`/api/listings/1/reservations`)
-  //   .then(response => response.json())
-  //   .then(response => {
-  //     let clone = JSON.parse(JSON.stringify(response));
-  //     // this.filterByDate(response);
-  //     console.log(clone.reservations)
-  //     console.log(clone.reservations.length)
-  //     console.log(clone.reservations[1].booking_start);
-  //     var dateStrings = this.getStringBookedDates(clone.reservations);
-  //     console.log(dateStrings)
-  //     this.setState({ bookedDates: dateStrings });
-
-  //   })
-  // } else {
-  //   console.log('listing not found could not return');
-  // }
 
   getDaysInBetween(reservationsArr) {
     // var outputArr = [];
@@ -181,27 +131,8 @@ initializeListing() {
     //days is an array that has  every string date
       //['2019-01-06', '2019-02-06', '2019-03-06', '2019-04-06']
     //count length as number to multiply by listing_price to get totalPrice
-
-    days[index] = room;
-    days[index].reservedBeds = guests;
-    days[index].avg = avg;
-
-
-    this.setState({
-        selectedDates: days,
-    })
-    this.updateTotal(rooms);
-  }
-
-  updateTotal(days) {
-    let total = 0;
-    for(var i in days) {
-      if (rooms[i].reservedBeds !=="Select") {
-        total += rooms[i].reservedBeds * rooms[i].avg * rooms[i].length;
-      }
     }
-    this.setState({total: total});
-  }
+
 
   turnOff(event) {
     if (!event.target.className.includes("nullClick")) {
@@ -250,8 +181,7 @@ initializeListing() {
         <Styles onClick={this.turnOff}>
             <Container>
 
-                  <Reservations>
-                  </Reservations>
+
             <SearchWindow startDate={this.state.startDate}
                     endDate={this.state.endDate}
                     startCal={this.state.startCal}
@@ -264,7 +194,6 @@ initializeListing() {
                     bookedDates={this.state.bookedDates}
                     />
             <ReservationConfirm
-                    room={this.state.currentRoom}
                     guests={this.state.numberOfGuests}
                     average={this.state.averagePrice}
                     selected={this.state.selectedDates}

@@ -98,7 +98,6 @@ class Calendar extends React.Component {
   componentDidMount() {
 
     const date = this.props.date.split('-')
-    // const date = '2019-05-05'.split('-')
     const month = date[1];
     const year = date[0];
     const day = date[2];
@@ -170,6 +169,8 @@ class Calendar extends React.Component {
     }
   }
 
+  //some if these CalDate props don't belong or lead to anything.. had some ideas but wasn't sure where to go with them
+  
   render() {
     return (
       <Cal id={this.props.id} className="nullClick">

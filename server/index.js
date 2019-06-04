@@ -23,28 +23,6 @@ app.get('/api/listings/:listingId/reservations', (req, res) => {
   });
 });
 
-//get request for all listings
-app.get('/listings', (req, res) => {
-  db.Listing.find({}, (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.json(result);
-    }
-  }); 
-});
-
-
-app.get('/bookings', (req, res) => {
-  db.Booking.find({}, (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.json(result);
-    }
-  });
-});
-
 
 const port = 3002;
 const server = app.listen(port, () => {
