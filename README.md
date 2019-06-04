@@ -49,4 +49,6 @@ Seeder: npm run seed
 Webpack: npm run react-dev
 ```
 
-load up 127.0.0.1:3000/api/listings/1/reservations in Postman to see example data being returned at /:id
+#### Seeing Data in Postman
+
+load up a 'GET' request to 127.0.0.1:3000/api/listings/1/reservations in Postman to see example data being returned at /:id
