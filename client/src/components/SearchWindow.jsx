@@ -46,12 +46,6 @@ const NormalHeader = styled.th`
 
 `;
 
-const LargeHeader = styled.th`
-
-  white-space: nowrap;
-  padding: .7rem;
-  min-width: 150px;
-`;
 
 const H4 = styled.h4`
   color: #484848;
@@ -82,16 +76,6 @@ const BookButton = styled.button`
     border-color: #ffffff; 
     outline: none !important;
 `
-
-
-
-
-
-
-
-
-
-
 
 
 const InlineP = styled.p`
@@ -157,17 +141,6 @@ const DropDown = styled.div`
     z-index: 0;
 `
 
-const FindButton = styled.button`
-cursor: pointer;
-background-color: #ff5a5f; 
-border-color: #130269; 
-border: none;
-width: 25%;
-height: 30px;
-font-weight: bold;
-color: white;
-margin-left: 2%;
-`
 
 class SearchWindow extends React.Component {
   constructor(props) {
@@ -209,7 +182,6 @@ class SearchWindow extends React.Component {
                 <Calendar startDate={this.props.startDate}
                   date={this.props.startDate}
                   setStartDate={this.props.setStartDate}
-                  hotelRooms={this.props.hotelRooms}
                   bookedDates={this.props.bookedDates}
                 id="Calendar"/>
               : null }
@@ -225,7 +197,6 @@ class SearchWindow extends React.Component {
                   date={this.props.endDate}
                   setEndDate={this.props.setEndDate}
                   startHolder={this.props.startHolder}
-                  selectedRooms={this.props.selectedRooms}
                   bookedDates={this.props.bookedDates}
                 id="Calendar2"/>
                 : null }
@@ -266,7 +237,3 @@ class SearchWindow extends React.Component {
 }  
 
 export default SearchWindow;
-
-// <FindButton id="submit" onClick={this.props.submitDates}>Find</FindButton>
-{/* <StyledBody><center>Report this listing</center>
-</StyledBody> */}

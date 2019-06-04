@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import ConfirmationRow from './ConfirmationRow.jsx';
 import styled, { keyframes } from 'styled-components';
 import { css } from 'styled-components';
+
+//NEVER GOT HERE. BUT THERE SHOULD BE A CONFIRMATION THAT RENDERS CONDITIONALLY WITH THE OVERALL NIGHTS AND TOTAL PRICE JUST PUT RANDOM THINGS HERE AS A PLACEHOLDER AND BRAIN DUMP OF THINGS THAT MAKE SENSE TO GO HERE
+
 
 const slideIn = keyframes`
     0% {
@@ -50,17 +52,6 @@ const Tr = styled.tr`
     color: rgb(105, 105, 105);
     vertical-align: bottom;
 `
-const Button = styled.button`
-    float: right;
-`
-
-const DormName = Th.extend`
-    border: 1px solid #C4C4C4;
-    white-space:nowrap;
-    padding:.5rem;
-    text-align: left;
-    width: 100%;   
-`
 
 const SubTotal = Th.extend`
     min-width: 40px;
@@ -84,6 +75,7 @@ const Span = styled.span`
     float:right;
 `;
 
+//messing around with animations -- not on brand lol just wanted to see what it'd look like
 
 const Transit = styled.div`
 max-height: 500px;
@@ -103,7 +95,6 @@ class ReservationConfirm extends React.Component {
         this.state = {
             toggler: false
         }
-        this.createRows = this.createRows.bind(this);
         this.appear = this.appear.bind(this);
     }
 
@@ -111,13 +102,6 @@ class ReservationConfirm extends React.Component {
         this.setState({ toggler: true })
     }
 
-    createRows(rooms) {
-        let roomsArray = [];
-        for (var i in rooms) {
-            roomsArray.push(rooms[i]);
-        }
-        return roomsArray;
-    }
 
     render() {
         return (
@@ -126,8 +110,7 @@ class ReservationConfirm extends React.Component {
                 <StyledTable>
                     <thead>
                         <Tr>
-                            <DormName><H4>My Selection</H4></DormName>
-                            <NormalHeader>Bed</NormalHeader>
+                            <H4>My Selection</H4>
                             <NormalHeader>Price Per Night</NormalHeader>
                             <Th>Nights</Th>
                             <SubTotal>Total</SubTotal>
@@ -144,7 +127,6 @@ class ReservationConfirm extends React.Component {
                         </tr>
                     </StyledBody>
                 </StyledTable>
-                <Button>Confirm</Button>
 
             </Transit>
             </HeightCheck>
@@ -153,5 +135,3 @@ class ReservationConfirm extends React.Component {
 }
 
 export default ReservationConfirm;
-
-// {this.createRows(this.props.selected).map((room, index) =>  <ConfirmationRow room={room} key={index} appear={this.appear} total={this.props.total}/>)}
