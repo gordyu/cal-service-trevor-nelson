@@ -18,12 +18,12 @@
 //   });
 // });
 
-import React from 'react';
-import { shallow, mount, render } from 'enzyme';
+// import React from 'react';
+// import { shallow, mount, render } from 'enzyme';
 
-test('render a label', () => {
-  const wrapper = shallow(
-    <Label>Hello Jest!</Label>
-  );
-  expect(wrapper).toMatchSnapshot();
-});
+// test('render a label', () => {
+//   const wrapper = shallow(
+//     <Label>Hello Jest!</Label>
+//   );
+//   expect(wrapper).toMatchSnapshot();
+// });

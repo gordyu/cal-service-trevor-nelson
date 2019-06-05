@@ -16,12 +16,29 @@ app.get('/seedDb', (req, res) => {
 });
 
 //gets all reservations at a specific listing id!
+
+// http://localhost:3002/api/listings/3/reservations
+app.post('/api/listings/', (req, res) => {
+  //create listing 
+
+})
+app.put('/api/listings/:listingId/reservations', (req, res) => {
+  //edit listing 
+
+})
 app.get('/api/listings/:listingId/reservations', (req, res) => {
   db.serveListing(req.params.listingId, (err, data) => {
     if (err) console.log('error with serving listing', err);
-    else res.send(data);
+    else {
+      res.send(data);
+    } 
   });
 });
+app.delete('/api/listings/:listingId/reservations', (req, res) => {
+  //delete listing 
+
+})
+
 
 
 const port = 3002;

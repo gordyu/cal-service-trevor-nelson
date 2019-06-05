@@ -26,6 +26,9 @@ const Unavailable = Basic.extend`
 const Text = styled.p`
     margin-top: 10px;
 `
+const PinkDate = Basic.extend`
+    background-color: pink;
+`
 
 class CalDate extends React.Component {
   constructor(props) {
