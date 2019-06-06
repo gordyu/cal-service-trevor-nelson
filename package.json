@@ -6,7 +6,7 @@
   "scripts": {
     "react-dev": "webpack -d --watch",
     "seed": "node ./database/seeder.js",
-    "start": "nodemon --ignore node_modules server/index.js",
+    "start": "nodemon --ignore node_modules server/server.js",
     "test": "mocha  test --watch",
     "lint": "eslint ./"
   },
