@@ -3,7 +3,7 @@ const db = require("../database/db.js")
 
 
 
-describe("Create", () => {
+describe("DB METHODS TEST BEGIN  ~ ~ ~ ~ ~ ~ ~ Create", () => {
 	before(function(done){
 		db.Booking.deleteMany({}, (err) => {
 			if (err) {
