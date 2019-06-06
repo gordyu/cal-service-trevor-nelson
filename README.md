@@ -1,9 +1,50 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Original README BELOW - - - - - -  - - - - -  - - - - -  - - - - -  - - - - - 
 # Project Name
 
 > This service renders the calendar/booking portion of Airbnb 'homes' page. The calendar is janky (just wanted to see if I could build a calendar from scratch: spoiler alert, I cannot), and the real meat of this is really the database/schema (Bookings is nested in Listings :o).
 
 ## Related Projects
-
+k
   - https://github.com/5uper5quad/Ja5mine-5ervice
   - https://github.com/5uper5quad/5arki5-5ervice
   - https://github.com/5uper5quad/Gloria5-5ervice

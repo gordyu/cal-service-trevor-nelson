@@ -7,7 +7,7 @@
     "react-dev": "webpack -d --watch",
     "seed": "node ./database/seeder.js",
     "start": "nodemon --ignore node_modules server/index.js",
-    "test": "jest --watch",
+    "test": "mocha  test --watch",
     "lint": "eslint ./"
   },
   "author": "Gloria Lee",
