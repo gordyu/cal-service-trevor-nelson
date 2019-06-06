@@ -49,19 +49,40 @@ app.delete('/:listingId',  (req, res) => {
 
 //booking (dates) routes - - - - - -- - - - - - -- - - - - - -- - - - - - -- - - - - - -- 
 app.post('/booking/:listingId', (req, res) => {
+  var newBooking = req.body;
+  db.createBooking(req.params.listingId, newBooking, (err, data) => {
+    if(err) console.log("error in app.POST (new reservation)") , res.status(404).send('failure!')
+    else console.log('sucessful booking post') , res.status(200).send('sucessfully added booking')
+  })
+})
+// app.post('/booking/:listingId', (req, res) => {
+//   var Booking = new db.Booking(req.body);
+//   db.createBooking(req.params.listingId, Booking, (err, data) => {
+//     if(err) console.log("error in app.POST (new reservation)") , res.status(404).send('failure!')
+//     else console.log('sucessful listing post') , res.status(200).send('sucessfully added booking')
+//   })
+// })
 
+app.put('/booking/:listingId/:record', (req, res) => {
+  var dates = req.body;
+  db.editBooking(req.params.listingId, req.params.record,  dates, (err, data) => {
+    if(err) console.log("error in app.PUT (edit reservation)") , res.status(404).send('failure!')
+    else console.log('sucessful booking put') , res.status(200).send('sucessfully edited  booking')
+  })
 })
 
-app.put('/booking/:listingId/:bookingId', (req, res) => {
-
-})
-
-app.get('/booking/:listingId/:bookingId', (req, res) => {
-
+app.get('/booking/:listingId/:record', (req, res) => {
+  db.serveBooking(req.params.listingId, req.params.record, (err, data) => {
+    if(err) console.log("error in app.get (edit reservation)") , res.status(404).send('failure!')
+    else console.log('sucessful booking get') , res.status(200).send(data)
+  })
 });
 
 app.delete('/booking/:listingId/:bookingId',  (req, res) => {
-
+  db.removeBooking(req.params.listingId, req.params.record, (err, data) => {
+    if(err) console.log("error in app.get (edit reservation)") , res.status(404).send('failure!')
+    else console.log('sucessful booking get') , res.status(200).send('deleted 1 record')
+  })
 })
 // - -  - - -- - - - - - -- - - - - - -- - - - - - -- - - - - - --  - - - - -- - - - - - -
 

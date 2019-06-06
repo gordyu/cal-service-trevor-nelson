@@ -1,6 +1,14 @@
-"id": 48,
-l"listing_name": "Trevors treehouse of magic vacations",
+{
+	"id": 48,
+"listing_name": "Trevors treehouse of magic vacations",
 "host_name": "James Franko",
 "max_guests": 24,
 "reservations": [],
 "listing_price": 239
+}
+
+{
+	"record": 0,
+	"booking_start": "2019-05-01",
+	"booking_end":  "2019-06-01"
+}
