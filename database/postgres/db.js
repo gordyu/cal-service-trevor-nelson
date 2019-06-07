@@ -1,17 +1,45 @@
 const  { Pool, Client } = require('pg');
-// const connectionString = process.env.DATABASE_URL || 'postgresql://trevjnels:password@database.server.com:5432/listings';
-const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/listings';
 
+const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/listings';
 const pool = new Pool({
 	connectionString,
 })
-
-const randomIndex = 1 + Math.floor(Math.random() * 3)
-
 const createBookingTableString = 'CREATE TABLE bookings(id serial PRIMARY KEY, cust_name VARCHAR (100) NOT NULL, host_id INTEGER REFERENCES bnbList(id),booking_start DATE NOT NULL, booking_end DATE NOT NULL)'
 const createListingsTableString = 'CREATE TABLE bnbList(id serial PRIMARY KEY, listing_name VARCHAR (200) UNIQUE NOT NULL, host_name VARCHAR (100) NOT NULL, max_guests integer NOT NULL, listing_price integer NOT NULL)'
 
-const dropTable  = (tableName) =>{
+const randomIndex = 1 + Math.floor(Math.random() * 3)
+
+
+
+
+// - - - - THE functions right below are just setup/removal of tables- - - - - - - - - - - - - -
+const preinitialize = (callback) => { // do not pass this on. I only did this dumb functional program call because I wasnt sure what to do with pool.end()
+	pool.query(createListingsTableString, (err, resp) => {
+		if(err) console.log('~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ error in initailize listings'), console.log(err);
+		else{
+			console.log(resp)
+			console.log('------------------------------------');
+			console.log('created the table: listings');
+			console.log('------------------------------------');
+		}
+		callback(createBookingTableString)
+	})
+}
+const initialize = () => {
+	preinitialize(nextTable => {
+		pool.query(nextTable, (err, resp) => {
+			if(err) console.log('~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ error in initailize bookings'), console.log(err);
+			else{
+				console.log(resp)
+				console.log('------------------------------------');
+				console.log('created the table:  bookings');
+				console.log('------------------------------------');
+			}
+			pool.end()
+		})
+	})
+}
+const dropTable  = (tableName, end) =>{
 	pool.query(`DROP TABLE ${tableName}`, (err, resp) => {
 		if(err) console.log('~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ error in tabledrop'), console.log(err);
 		else{
@@ -20,14 +48,26 @@ const dropTable  = (tableName) =>{
 			console.log('dropped the table: ', tableName);
 			console.log('------------------------------------');
 		}
+		if(end){
 		pool.end()
+		}
 	})
 }
+const drop = () => {
+	dropTable('bookings')
+	dropTable('bnblist', true)
+}
+
+const reset = () => {
+	dropTable('bookings')
+	dropTable('bnblist')
+	initialize();
+}
+// - - - - - - - - - - - - -- - - - - - - - - - - - -- - - - - - - - - - - - -- - - - - - - - - - - - -
 
 
 
-
-
+// - - - - - - - - BEGIN Actual crud methods - -- - - - - - - - - - - - -- - - - - - - - - - - - -
 const create = function(row, table){
 	if(table === 'bnblist'){
 		var {id, listing_name, host_name, max_guests, listing_price} = row;
@@ -111,14 +151,15 @@ const findBookingID = (number, callback) => {
 const update = function(updates, table, key, value, callback){
 	var changes = ''
 	for(var item in updates) {
-		changes+= `${item} = "${updates[item]}",`
+		changes+= `${item} = '${updates[item]}',`
 	}
-	// changes = changes.slice(0, -1);
-	// console.log(changes)
+	changes = changes.slice(0, -1);
+	console.log(changes)
 
-	pool.query(`UPDATE ${table} SET host_name = rainbow WHERE ${key} = ${value};`, (err, resp) => {
-		if(err || resp.rows.length === 0) {
-			if(err)	callback(err, null), console.log('~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ error in pg update')
+	pool.query(`UPDATE ${table} SET ${changes} WHERE ${key} = 
+	'${value}';`, (err, resp) => {
+		if(err) {
+	callback(err, null), console.log('~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ error in pg update')
 	}else{
 			console.log('------------------------------------');
 			console.log('succes in pg update.');
@@ -129,9 +170,33 @@ const update = function(updates, table, key, value, callback){
 	})
 }
 
-update({"host_name": 'trev'}, 'bnblist', 'id', 3, (err, data)=> {
-	console.log(err, data)
-})
+
+const remove = function(table, key, value, callback) {
+	pool.query(`DELETE FROM ${table} WHERE ${key} = 
+	'${value}';`, (err, resp) => {
+		if(err) {
+	callback(err, null), console.log('~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ error in pg delete')
+	}else{
+			console.log('------------------------------------');
+			console.log('succes in pg delete.');
+			console.log('------------------------------------');
+			callback(null, resp.rows)
+		}
+		pool.end()
+	})
+}
+// - - - - - - - - - - - - -- - - - - - - - - - - - -- - - - - - - - - - - - -- - - - - - - - - - - - -
+
+
+module.exports = { create, find, findListingID, findListsBookings, findBookingID, update, dropTable, remove, initialize, drop, reset}
+
+
+
+
+
+// update({"host_name": 'farts'}, 'bnblist', 'max_guests', 12, (err, data)=> {
+// 	console.log(err, data)
+// })
 
 
 // create({
@@ -155,6 +220,3 @@ update({"host_name": 'trev'}, 'bnblist', 'id', 3, (err, data)=> {
 
 
 
-
-
-module.exports = { create, find, findListingID, findListsBookings, findBookingID, update, dropTable }
