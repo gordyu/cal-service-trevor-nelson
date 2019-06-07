@@ -78,7 +78,7 @@ const reset = () => {
 const create = function(row, table, callback){
 	if(table === 'bnblist'){
 		var {id, listing_name, host_name, max_guests, listing_price} = row;
-		var listID = id || 'DEFAULT'
+		var listID = (id) || 'DEFAULT'
 		pool.query(`INSERT INTO ${table} VALUES (${listID}, '${listing_name}', '${host_name}', ${max_guests}, ${listing_price})`, (err, resp) => {
 			if(err) console.log('~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ error in pg create bookings'), callback(err, null)
 			else{
@@ -91,7 +91,7 @@ const create = function(row, table, callback){
 		})
 	} else if (table === 'bookings') {
 		var {id, cust_name, host_id, booking_start, booking_end} = row;
-		var bookID = id || 'DEFAULT'
+		var bookID = (id) || 'DEFAULT'
 		pool.query(`INSERT INTO ${table} VALUES (${bookID}, '${cust_name}', ${host_id}, '${booking_start}', '${booking_end}')`, (err, resp) => {
 			if(err) console.log('~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ error in pg insert bookings'),  callback(err, null)
 			else{
