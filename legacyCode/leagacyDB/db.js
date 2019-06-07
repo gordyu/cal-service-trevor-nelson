@@ -105,7 +105,7 @@ const editBooking  = (listingId, record,  dates, callback) => {
     console.log('------------------------------------');
     console.log(spliced)
     console.log('------------------------------------');
-    // var spliced = data.splice(bookingId-1, 1)
+    // var spliced = data.lice(bookingId-1, 1)
     // console.log(data)
     var obj = {}
     var sliced = Object.assign(obj, original)

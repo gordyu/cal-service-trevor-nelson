@@ -1,5 +1,5 @@
 const expect = require('chai').expect
-const db = require("../database/db.js") 
+const db = require(".../database/leagacyDB/db.js/index.js") 
 
 
 
