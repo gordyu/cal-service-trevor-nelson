@@ -123,6 +123,15 @@ const find = function(table, key, value, callback){
 			// pool.end()
 		})
 }
+const findBookingID = (bookingID, callback) => {
+	find('bookings', 'id', bookingID, (err, data) => {
+		if (err) {
+		callback(err, null)
+		} else {
+			callback(null, data)
+		}
+	})
+}
 const findListsBookings = (host_id, callback)  => {
 	find('bookings', 'host_id', host_id, (err, data) => {
 		if (err) {
@@ -143,15 +152,7 @@ const findListingID = (number = randomIndex, callback) => {
 		}
 	})
 }
-const findBookingID = (number, callback) => {
-	find('bookings', 'id', number, (err, data) => {
-		if (err) {
-		callback(err, null)
-		} else {
-			callback(null, data)
-		}
-	})
-}
+
 
 const update = function(updates, table, key, value, callback){
 	var changes = ''
@@ -164,13 +165,13 @@ const update = function(updates, table, key, value, callback){
 	pool.query(`UPDATE ${table} SET ${changes} WHERE ${key} = 
 	'${value}';`, (err, resp) => {
 		if(err) {
-			console.log(resp)
+		
 	callback(err, null), console.log('~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ error in pg update')
 	}else{
 			console.log('------------------------------------');
 			console.log('succes in pg update.');
 			console.log('------------------------------------');
-			callback(null, resp.rows)
+			callback(null, resp)
 		}
 		// pool.end()
 	})

@@ -54,7 +54,6 @@ app.delete('/:listingId',  (req, res) => {
 // - -  - - -- - - - - - -- - - - - - -- - - - - - -- - - - - - --  - - - - -- - - - - - -
 
 
-
 //booking (dates) routes - - - - - -- - - - - - -- - - - - - -- - - - - - -- - - - - - -- 
 app.post('/booking/:listingId', (req, res) => {
   var newBooking = req.body;
