@@ -8,7 +8,21 @@ const pool = new Pool({
 
 const randomIndex = 1 + Math.floor(Math.random() * 3)
 
+const createBookingTableString = 'CREATE TABLE bookings(id serial PRIMARY KEY, cust_name VARCHAR (100) NOT NULL, host_id INTEGER REFERENCES bnbList(id),booking_start DATE NOT NULL, booking_end DATE NOT NULL)'
+const createListingsTableString = 'CREATE TABLE bnbList(id serial PRIMARY KEY, listing_name VARCHAR (200) UNIQUE NOT NULL, host_name VARCHAR (100) NOT NULL, max_guests integer NOT NULL, listing_price integer NOT NULL)'
 
+const dropTable  = (tableName) =>{
+	pool.query(`DROP TABLE ${tableName}`, (err, resp) => {
+		if(err) console.log('~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ error in tabledrop'), console.log(err);
+		else{
+			console.log(resp)
+			console.log('------------------------------------');
+			console.log('dropped the table: ', tableName);
+			console.log('------------------------------------');
+		}
+		pool.end()
+	})
+}
 
 
 
@@ -143,4 +157,4 @@ update({"host_name": 'trev'}, 'bnblist', 'id', 3, (err, data)=> {
 
 
 
-module.exports = { create, find, findListingID, findListsBookings, findBookingID, update }
+module.exports = { create, find, findListingID, findListsBookings, findBookingID, update, dropTable }
