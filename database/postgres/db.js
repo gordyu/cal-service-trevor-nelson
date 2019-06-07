@@ -75,32 +75,32 @@ const reset = () => {
 
 
 // - - - - - - - - BEGIN Actual crud methods - -- - - - - - - - - - - - -- - - - - - - - - - - - -
-const create = function(row, table){
+const create = function(row, table, callback){
 	if(table === 'bnblist'){
 		var {id, listing_name, host_name, max_guests, listing_price} = row;
 		var listID = id || 'DEFAULT'
 		pool.query(`INSERT INTO ${table} VALUES (${listID}, '${listing_name}', '${host_name}', ${max_guests}, ${listing_price})`, (err, resp) => {
-			if(err) console.log('~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ error in pg create bookings'), console.log(err);
+			if(err) console.log('~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ error in pg create bookings'), callback(err, null)
 			else{
-				console.log(resp)
+				callback(null, 'succes in adding to listings table.')
 				console.log('------------------------------------');
-				console.log('succes in adding to listings table.');
+				// console.log('succes in adding to listings table.');
 				console.log('------------------------------------');
 			}
-			pool.end()
+			// pool.end()
 		})
 	} else if (table === 'bookings') {
 		var {id, cust_name, host_id, booking_start, booking_end} = row;
 		var bookID = id || 'DEFAULT'
 		pool.query(`INSERT INTO ${table} VALUES (${bookID}, '${cust_name}', ${host_id}, '${booking_start}', '${booking_end}')`, (err, resp) => {
-			if(err) console.log('~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ error in pg insert bookings'), console.log(err);
+			if(err) console.log('~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ error in pg insert bookings'),  callback(err, null)
 			else{
-				console.log(resp)
+				callback(null, 'succes in adding to bookings table.')
 				console.log('------------------------------------');
 				console.log('succes in adding to bookings table.');
 				console.log('------------------------------------');
 			}
-			pool.end()
+			// pool.end()
 		})
 	}
 }
@@ -120,7 +120,7 @@ const find = function(table, key, value, callback){
 				console.log('------------------------------------');
 				callback(null, resp.rows)
 			}
-			pool.end()
+			// pool.end()
 		})
 }
 const findListsBookings = (host_id, callback)  => {
@@ -153,8 +153,6 @@ const findBookingID = (number, callback) => {
 	})
 }
 
-
-
 const update = function(updates, table, key, value, callback){
 	var changes = ''
 	for(var item in updates) {
@@ -166,6 +164,7 @@ const update = function(updates, table, key, value, callback){
 	pool.query(`UPDATE ${table} SET ${changes} WHERE ${key} = 
 	'${value}';`, (err, resp) => {
 		if(err) {
+			console.log(resp)
 	callback(err, null), console.log('~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ error in pg update')
 	}else{
 			console.log('------------------------------------');
@@ -173,7 +172,7 @@ const update = function(updates, table, key, value, callback){
 			console.log('------------------------------------');
 			callback(null, resp.rows)
 		}
-		pool.end()
+		// pool.end()
 	})
 }
 
@@ -189,7 +188,7 @@ const remove = function(table, key, value, callback) {
 			console.log('------------------------------------');
 			callback(null, resp.rows)
 		}
-		pool.end()
+		// pool.end()
 	})
 }
 // - - - - - - - - - - - - -- - - - - - - - - - - - -- - - - - - - - - - - - -- - - - - - - - - - - - -
