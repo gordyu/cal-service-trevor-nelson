@@ -5,6 +5,9 @@
   "main": "index.js",
   "scripts": {
     "react-dev": "webpack -d --watch",
+    "drop": "node ./database/postgres/drop.js",
+    "initializeDB": "node ./database/postgres/initialize.js",
+    "reset": "node ./database/postgres/reset.js",
     "seed": "node ./database/seeder.js",
     "start": "nodemon --ignore node_modules server/server.js",
     "test": "mocha  test --watch",

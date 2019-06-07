@@ -39,7 +39,7 @@ const initialize = () => {
 		})
 	})
 }
-const dropTable  = (tableName, end) =>{
+const dropTable  = (tableName, end, callback) =>{
 	pool.query(`DROP TABLE ${tableName}`, (err, resp) => {
 		if(err) console.log('~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ error in tabledrop'), console.log(err);
 		else{
@@ -48,20 +48,27 @@ const dropTable  = (tableName, end) =>{
 			console.log('dropped the table: ', tableName);
 			console.log('------------------------------------');
 		}
+		
 		if(end){
+			callback()
 		pool.end()
+		} else {
+			callback()
 		}
 	})
 }
 const drop = () => {
-	dropTable('bookings')
-	dropTable('bnblist', true)
+	dropTable('bookings', null, ()=>{
+		dropTable('bnblist', true, ()=>{})
+	})
 }
 
 const reset = () => {
-	dropTable('bookings')
-	dropTable('bnblist')
-	initialize();
+	dropTable('bookings', null, (blah) => {
+		dropTable('bnblist', null, (blahgh) => {
+			initialize();
+		})
+	})
 }
 // - - - - - - - - - - - - -- - - - - - - - - - - - -- - - - - - - - - - - - -- - - - - - - - - - - - -
 
