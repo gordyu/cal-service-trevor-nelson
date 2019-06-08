@@ -6,9 +6,8 @@
   "scripts": {
     "react-dev": "webpack -d --watch",
     "drop": "node ./database/postgres/drop.js",
-    "initializeDB": "node ./database/postgres/initialize.js",
     "reset": "node ./database/postgres/reset.js",
-    "seed": "node ./database/seeder.js",
+    "seed": "node ./database/postgres/seeder.js",
     "start": "nodemon --ignore node_modules server/server.js",
     "test": "mocha  test --watch",
     "lint": "eslint ./"
@@ -28,6 +27,7 @@
     "jest": "^24.8.0",
     "json2csv": "^4.5.1",
     "mocha": "^6.1.4",
+    "moment": "^2.24.0",
     "nodemon": "^1.19.0",
     "pg": "^7.11.0",
     "supertest": "^3.1.0",

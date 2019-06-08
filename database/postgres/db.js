@@ -4,13 +4,17 @@ const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/
 const pool = new Pool({
 	connectionString,
 })
-const createBookingTableString = 'CREATE TABLE bookings(id serial PRIMARY KEY, cust_name VARCHAR (100) NOT NULL, host_id INTEGER REFERENCES bnbList(id),booking_start DATE NOT NULL, booking_end DATE NOT NULL)'
-const createListingsTableString = 'CREATE TABLE bnbList(id serial PRIMARY KEY, listing_name VARCHAR (200) UNIQUE NOT NULL, host_name VARCHAR (100) NOT NULL, max_guests integer NOT NULL, listing_price integer NOT NULL)'
+const createBookingTableString = 'CREATE TABLE bookings(id SERIAL PRIMARY KEY, cust_name VARCHAR (100) NOT NULL, host_id INTEGER REFERENCES bnbList(id),booking_start DATE NOT NULL, booking_end DATE NOT NULL)'
+const createListingsTableString = 'CREATE TABLE bnbList(id serial PRIMARY KEY, listing_name VARCHAR (200) NOT NULL, host_name VARCHAR (100) NOT NULL, max_guests integer NOT NULL, listing_price integer NOT NULL)'
 
 const randomIndex = 1 + Math.floor(Math.random() * 3)
 
 
-
+const dbLoader = (table, filepath, callback) => {
+	pool.query(`COPY ${table} FROM '${filepath}';`, (err, resp) => {
+		callback(err, resp)
+	})
+} 
 
 // - - - - THE functions right below are just setup/removal of tables- - - - - - - - - - - - - -
 const preinitialize = (callback) => { // do not pass this on. I only did this dumb functional program call because I wasnt sure what to do with pool.end()
@@ -195,7 +199,7 @@ const remove = function(table, key, value, callback) {
 // - - - - - - - - - - - - -- - - - - - - - - - - - -- - - - - - - - - - - - -- - - - - - - - - - - - -
 
 
-module.exports = { create, find, findListingID, findListsBookings, findBookingID, update, dropTable, remove, initialize, drop, reset}
+module.exports = { create, find, findListingID, findListsBookings, findBookingID, update, dropTable, remove, initialize, drop, reset, dbLoader}
 
 
 
