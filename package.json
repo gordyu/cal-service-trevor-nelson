@@ -35,19 +35,20 @@
     "webpack-cli": "^3.3.2"
   },
   "dependencies": {
-    "cors": "^2.8.4",
     "bluebird": "^3.3.4",
     "body-parser": "^1.17.0",
     "core-util-is": "^1.0.2",
+    "cors": "^2.8.4",
     "express": "^4.16.4",
+    "faker": "^4.1.0",
     "jest-cli": "^24.8.0",
     "jquery": "^3.1.1",
     "lodash": "^4.17.4",
     "mongoose": "^4.9.6",
     "react": "^15.6.2",
     "react-dom": "^15.6.2",
-    "request": "^2.81.0",
     "react-transition-group": "^1.2.1",
+    "request": "^2.81.0",
     "styled-components": "^3.3.2"
   }
 }
