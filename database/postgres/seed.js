@@ -7,19 +7,20 @@ const db = require("./db.js")
 const words = require("./resources/airbnbwords.js")
 const seedFilePath = "./SeedSilo/seedFile.txt"
 
+var adjectivesLength = words.adjectives.length;
 var homesLength = words.homes.length
 var proximityLength = words.proximity.length
 var nearbyLength = words.nearby.length
 var headers = "listing_name\thost_name\tmax_guests\tlisting_price\n"
 
-// var numSeeds = 10000000
-var numSeeds = 100
+var numSeeds = 10000000
+// var numSeeds = 4
 const objCreate = (i) => {
 	var seedObj = {
-		"listing_name": `" ${faker.name.findName() + faker.name.findName() + faker.name.findName() + faker.name.findName() + faker.name.findName()}"`,
-		"host_name": "Brandy Nelson",
-		"max_guests": 4,
-		"listing_price": 209
+		"listing_name": `${words.adjectives[i%adjectivesLength]} ${words.homes[i%homesLength]} ${words.proximity[i%proximityLength]} ${words.nearby[i%nearbyLength]}`,
+		"host_name": faker.name.findName(),
+		"max_guests": 2+ Math.floor(Math.random() * 10),
+		"listing_price": 52+ Math.floor(Math.random() * 500)
 		}
 		return seedObj;
 }
@@ -27,7 +28,7 @@ const objCreate = (i) => {
 	
 
 
-fs.writeFile(path.join(__dirname ,seedFilePath), headers, 'utf8', (err, data) => {
+fs.writeFile(path.join(__dirname ,seedFilePath), "", 'utf8', (err, data) => {
 	if(err) console.error(err)
 	else {
 	fs.open(path.join(__dirname ,seedFilePath), 'r+', (err, fd) => {
@@ -38,19 +39,26 @@ fs.writeFile(path.join(__dirname ,seedFilePath), headers, 'utf8', (err, data) =>
 		console.log('------------------------------------');
 		
 		const recurser = (n) => {
-			if(n>numSeeds) {
+			if(n>numSeeds ) {
 				console.log('------$-------------$----------$-------');
 				console.log('FileWrite complete @' + Date());
 				console.log('--$-----------$-------------$---------$-');
 				return;
 			}
-			var {listing_name, host_name, max_guests, listing_price} = objCreate();
+			if(n === 0) {
+			fs.write(fd, headers, (err) => {
+				if(err) console.error(err)
+				recurser(n+1)
+			})
+		} else {
+			var {listing_name, host_name, max_guests, listing_price} = objCreate(n);
 			var inputString = `${listing_name}\t${host_name}\t${max_guests}\t${listing_price}\n`
-			
 			fs.write(fd, inputString, (err) => {
 				if(err) console.error(err)
 				recurser(n+1)
 			})
+		}
+		
 		}
 		recurser(0)
 		}

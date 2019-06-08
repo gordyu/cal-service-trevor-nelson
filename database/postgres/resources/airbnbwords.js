@@ -1,3 +1,31 @@
+const adjectives = [
+  'Beautiful',
+  'Sunny',
+  'Abysmal',
+  'Haunting',
+  'Neo-Classical',
+  'Wonderful',
+  'Artsy',
+  'Horrific',
+  'Cold and Decrepit',
+  'Modern',
+  'Comfortable',
+  'Memorable',
+  'Rustic',
+  'Whimsical',
+  'Quaint',
+  'Modest',
+  'Dated',
+  'Overpriced',
+	'Coveted',
+	'Musty',
+	'Crusty',
+	'Modern',
+	'Ancient',
+	'Terribly-Built',
+	'Super-Unsafe',
+	'Rat-Filled'
+];
 
 
 const homes = [
@@ -61,4 +89,4 @@ const nearby = [
   'Mars'
 ];
 
-module.exports = { nearby, proximity, homes}
+module.exports = { nearby, proximity, homes, adjectives}
