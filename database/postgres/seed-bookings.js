@@ -23,7 +23,7 @@ const bookingCreate = (i) => {
 // BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS 
 	var seedObj = {
 		"cust_name": `${faker.name.findName()}`,
-		"host_id":  Math.floor(Math.random() * 100000),
+		"host_id":  Math.floor(Math.random() * 1000000),
 		"booking_start": moment.unix(randomUnixTime).format("YYYY-MM-DD"),
 		"booking_end":  moment.unix(randomEndDate).format("YYYY-MM-DD")
 		}
