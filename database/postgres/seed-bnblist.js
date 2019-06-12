@@ -17,7 +17,7 @@ var proximityLength = words.proximity.length;
 var nearbyLength = words.nearby.length;
 
 // LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS
-var numSeeds = 1000;
+var numSeeds = 1000000;
 // var numSeeds = 4
 const objCreate = (i) => {
 	var seedObj = {

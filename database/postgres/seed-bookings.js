@@ -13,7 +13,7 @@ const seedFilePath = path.join(__dirname, './SeedSilo/seedFileBookings.tsv');
 // BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS
 
 //604800 - 7 days in unix time
-var numSeeds = 1000;
+var numSeeds = 10000000;
 // var numSeeds = 4
 const bookingCreate = (i) => {
 	var randomUnixTime = 1556668800 + Math.floor(Math.random() * 36892800); // picks a random day between now and july 1th 2020
