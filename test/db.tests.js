@@ -3,7 +3,7 @@ const expect = require('chai').expect;
 const db = require('../database/postgres/db.js');
 
 var randomId = 800000 + Math.floor(Math.random() * 200000);
-
+var randoTimes10 = randomId * 10;
 describe('DB tests', () => {
 	it('Will get all of the bookings from the DB for one listing ', (done) => {
 		db.find('bookings', 'host_id', randomId, (err, data) => {
@@ -22,9 +22,9 @@ describe('DB tests', () => {
 		});
 	});
 	it('Will get one booking from the DB based on id ', (done) => {
-		db.findBookingID(randomId, (err, data) => {
+		db.find('bookings', 'id', randoTimes10, (err, data) => {
 			expect(err).to.equal(null);
-			// console.log(data);
+			console.log(data);
 			done();
 		});
 	});
