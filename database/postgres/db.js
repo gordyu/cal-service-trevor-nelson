@@ -125,7 +125,7 @@ const create = function(row, table, callback) {
 
 const find = function(table, key, value, callback) {
 	var startTime = Date.now();
-	pool.query(`SELECT * FROM ${table} WHERE ${key} = ${value}`, (err, resp) => {
+	pool.query(`SELECT * FROM ${table} WHERE ${key} = ${value};`, (err, resp) => {
 		if (err || resp.rows.length === 0) {
 			console.log(Date.now() - startTime);
 			if (err) callback(err, null), console.log('~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ error in pg find');
@@ -196,6 +196,31 @@ const update = function(updates, table, key, value, callback) {
 	);
 };
 
+const getbookingDates = (host_id, callback) => {
+	var start = Date.now();
+	pool.query(`SELECT booking_start, booking_end FROM bookings WHERE host_id = ${host_id};`, (err, data) => {
+		if (err) console.log(err), callback(err, null);
+		else {
+			console.log(Date.now() - start);
+			callback(null, data);
+		}
+	});
+};
+
+const join = (host_id, callback) => {
+	var start = Date.now();
+	pool.query(
+		`SELECT * FROM bookings INNER JOIN bnblist ON bnblist.id  = bookings.host_id WHERE host_id = ${host_id}`,
+		(err, data) => {
+			if (err) console.log(err), callback(err, null);
+			else {
+				console.log(Date.now() - start);
+				callback(null, data.rows);
+			}
+		}
+	);
+};
+
 const remove = function(table, key, value, callback) {
 	pool.query(
 		`DELETE FROM ${table} WHERE ${key} = 
@@ -217,6 +242,7 @@ const remove = function(table, key, value, callback) {
 
 module.exports = {
 	create,
+	getbookingDates,
 	find,
 	findListingID,
 	findListsBookings,
@@ -227,6 +253,7 @@ module.exports = {
 	initialize,
 	drop,
 	reset,
+	join,
 	dbLoader
 };
 

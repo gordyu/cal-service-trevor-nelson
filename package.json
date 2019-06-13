@@ -13,7 +13,6 @@
 		"test": "mocha  test --watch",
 		"lint": "eslint ./"
 	},
-
 	"author": "Gloria Lee",
 	"license": "ISC",
 	"devDependencies": {
