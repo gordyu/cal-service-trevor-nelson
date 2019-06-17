@@ -24,10 +24,10 @@ const preinitialize = (callback) => {
 		if (err)
 			console.log('~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ error in initailize listings'), console.log(err);
 		else {
-			console.log(resp);
-			console.log('------------------------------------');
-			console.log('created the table: listings');
-			console.log('------------------------------------');
+			// console.log(resp);
+			// console.log('------------------------------------');
+			// console.log('created the table: listings');
+			// console.log('------------------------------------');
 		}
 		callback(createBookingTableString);
 	});
@@ -95,9 +95,9 @@ const create = function(row, table, callback) {
 						callback(err, null);
 				else {
 					callback(null, 'succes in adding to listings table.');
-					console.log('------------------------------------');
-					// console.log('succes in adding to listings table.');
-					console.log('------------------------------------');
+					// console.log('------------------------------------');
+					// // console.log('succes in adding to listings table.');
+					// console.log('------------------------------------');
 				}
 				// pool.end()
 			}
@@ -113,9 +113,9 @@ const create = function(row, table, callback) {
 						callback(err, null);
 				else {
 					callback(null, 'succes in adding to bookings table.');
-					console.log('------------------------------------');
-					console.log('succes in adding to bookings table.');
-					console.log('------------------------------------');
+					// console.log('------------------------------------');
+					// console.log('succes in adding to bookings table.');
+					// console.log('------------------------------------');
 				}
 				// pool.end()
 			}
@@ -124,24 +124,25 @@ const create = function(row, table, callback) {
 };
 
 const find = function(table, key, value, callback) {
-	var startTime = Date.now();
+	// var startTime = Date.now();
 	pool.query(`SELECT * FROM ${table} WHERE ${key} = ${value};`, (err, resp) => {
 		if (err || resp.rows.length === 0) {
-			console.log(Date.now() - startTime);
+			// console.log(Date.now() - startTime);
 			if (err) callback(err, null), console.log('~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ error in pg find');
 			else {
 				callback('emty array was returned from find', null);
 			}
 		} else {
-			console.log(Date.now() - startTime);
-			console.log('------------------------------------');
-			console.log('succes in pg find.');
-			console.log('------------------------------------');
+			// console.log(Date.now() - startTime);
+			// console.log('------------------------------------');
+			// console.log('succes in pg find.');
+			// console.log('------------------------------------');
 			callback(null, resp.rows);
 		}
 		// pool.end()
 	});
 };
+
 const findBookingID = (bookingID, callback) => {
 	find('bookings', 'id', bookingID, (err, data) => {
 		if (err) {
@@ -177,7 +178,7 @@ const update = function(updates, table, key, value, callback) {
 		changes += `${item} = '${updates[item]}',`;
 	}
 	changes = changes.slice(0, -1);
-	console.log(changes);
+	// console.log(changes);
 
 	pool.query(
 		`UPDATE ${table} SET ${changes} WHERE ${key} = 
@@ -186,9 +187,9 @@ const update = function(updates, table, key, value, callback) {
 			if (err) {
 				callback(err, null), console.log('~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ error in pg update');
 			} else {
-				console.log('------------------------------------');
-				console.log('succes in pg update.');
-				console.log('------------------------------------');
+				// console.log('------------------------------------');
+				// console.log('succes in pg update.');
+				// console.log('------------------------------------');
 				callback(null, resp);
 			}
 			// pool.end()
@@ -197,24 +198,25 @@ const update = function(updates, table, key, value, callback) {
 };
 
 const getbookingDates = (host_id, callback) => {
-	var start = Date.now();
+	// var start = Date.now();
 	pool.query(`SELECT booking_start, booking_end FROM bookings WHERE host_id = ${host_id};`, (err, data) => {
 		if (err) console.log(err), callback(err, null);
 		else {
-			console.log(Date.now() - start);
+			// console.log(Date.now() - start);
 			callback(null, data);
 		}
 	});
 };
 
 const join = (host_id, callback) => {
-	var start = Date.now();
+	// var start = Date.now();
 	pool.query(
 		`SELECT * FROM bookings INNER JOIN bnblist ON bnblist.id  = bookings.host_id WHERE host_id = ${host_id}`,
 		(err, data) => {
 			if (err) console.log(err), callback(err, null);
 			else {
-				console.log(Date.now() - start);
+				// console.log('trevor');
+				// console.log(Date.now() - start);
 				callback(null, data.rows);
 			}
 		}
@@ -229,9 +231,9 @@ const remove = function(table, key, value, callback) {
 			if (err) {
 				callback(err, null), console.log('~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ error in pg delete');
 			} else {
-				console.log('------------------------------------');
-				console.log('succes in pg delete.');
-				console.log('------------------------------------');
+				// console.log('------------------------------------');
+				// console.log('succes in pg delete.');
+				// console.log('------------------------------------');
 				callback(null, resp.rows);
 			}
 			// pool.end()

@@ -16,14 +16,14 @@ app.post('/', (req, res) => {
 	var newListing = req.body;
 	db.create(newListing, 'bnblist', (err, data) => {
 		if (err) console.log('error in app.POST (main)'), res.status(404).send('failure!');
-		else console.log('sucessful listing post'), res.status(200).send(data);
+		else res.status(200).send(data);
 	});
 });
 
 app.put('/:listingId', (req, res) => {
 	db.update(req.body, 'bnblist', 'id', req.params.listingId, (err, data) => {
 		if (err) console.log('error in app.PUT (main)'), res.status(404).send('failure!');
-		else console.log('sucessful edit of listing post'), res.status(200).send(data);
+		else res.status(200).send(data);
 	});
 });
 
