@@ -1,4 +1,6 @@
 require('newrelic');
+// process.env.NODE_ENV = 'production';
+
 const express = require('express');
 const db = require('../database/postgres/db.js');
 const bodyParser = require('body-parser');
@@ -7,7 +9,13 @@ const redis = require('redis');
 const responseTime = require('response-time')
 
 const app = express();
-const client = redis.createClient();
+const REDIS_URL = process.env.REDIS_URL;
+const client = redis.createClient(REDIS_URL)
+
+client.on('connect', () => {
+	console.log('connected to reddis')
+})
+
 
 client.on('error', (err) => {
 	console.log("ERROR " + err);
@@ -36,28 +44,22 @@ app.put('/:listingId', (req, res) => {
 });
 
 app.get('/:listingId', (req, res) => {
-	const query = (req.query.query).trim();
-	const searchURL = `http://localhost:3002/${req.params.id}`
-	 client.get(`listings:${query}`, (err, result) => {
-		if(result){
-			const resultJSON = JSON.parse(result);
-		 	return res.status(200).json(resultJSON);
+	client.get(`${req.params.listingId}`, (err, cachedData) => {
+		if(err){
+				db.findListingID(req.params.listingId, (err, data) => {
+					if (err) console.log('error with serving listing', err);
+					else {
+						client.set(`${req.params.listingId}`, data, (err, data) => {
+								res.send(data);
+						})
+					
+					}	
+			});
 		} else {
-			db.findListingID(req.params.listingId, (err, data) => {
-						if (err) console.log('error with serving listing', err);
-						else {
-							const responseJSON = data;
-					client.setex(`listings:${query}`, 3600, JSON.stringify({source:'Redis Cache', ...responseJSON, }))
-				return 	res.status(200).json({source:'Redis Cache', ...responseJSON, })
-			}
-	});
+			res.send(cachedData);
 		}
 	})
 });
-
-
-
-
 app.get('/:listingId/bookings', (req, res) => {
 	db.findListsBookings(req.params.listingId, (err, data) => {
 		if (err) console.log('error with serving listing', err);
