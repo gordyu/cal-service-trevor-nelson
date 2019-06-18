@@ -1,6 +1,6 @@
 apps:
   - script   : server/server.js
-    instances: 4
+    instances: max
     exec_mode: cluster
   - script :  server/server.js
     watch  : true

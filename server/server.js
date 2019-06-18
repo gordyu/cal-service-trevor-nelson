@@ -6,22 +6,21 @@ const db = require('../database/postgres/db.js');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const redis = require('redis');
-const responseTime = require('response-time')
+const responseTime = require('response-time');
 
 const app = express();
 const REDIS_URL = process.env.REDIS_URL;
-const client = redis.createClient(REDIS_URL)
+const client = redis.createClient(REDIS_URL);
 
 client.on('connect', () => {
-	console.log('connected to reddis')
-})
-
+	console.log('connected to reddis');
+});
 
 client.on('error', (err) => {
-	console.log("ERROR " + err);
-})
+	console.log('ERROR ' + err);
+});
 
-app.use(responseTime())
+app.use(responseTime());
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../public'));
@@ -30,8 +29,10 @@ app.use('/', express.static(`${__dirname}/../public`));
 //listing (main) routes - - - - - -- - - - - - -- - - - - - -- - - - - - -- - - - - - --
 app.post('/', (req, res) => {
 	var newListing = req.body;
+	// console.log(newListing);
+	// var input = JSON.stringify(newListing);
 	db.create(newListing, 'bnblist', (err, data) => {
-		if (err) console.log('error in app.POST (main)'), res.status(404).send('failure!');
+		if (err) res.status(404).send('failure!');
 		else res.status(200).send(data);
 	});
 });
@@ -45,20 +46,19 @@ app.put('/:listingId', (req, res) => {
 
 app.get('/:listingId', (req, res) => {
 	client.get(`${req.params.listingId}`, (err, cachedData) => {
-		if(err){
-				db.findListingID(req.params.listingId, (err, data) => {
-					if (err) console.log('error with serving listing', err);
-					else {
-						client.set(`${req.params.listingId}`, data, (err, data) => {
-								res.send(data);
-						})
-					
-					}	
+		if (err) {
+			db.findListingID(req.params.listingId, (err, data) => {
+				if (err) console.log('error with serving listing', err);
+				else {
+					client.set(`${req.params.listingId}`, data, (err, data) => {
+						res.send(data);
+					});
+				}
 			});
 		} else {
 			res.send(cachedData);
 		}
-	})
+	});
 });
 app.get('/:listingId/bookings', (req, res) => {
 	db.findListsBookings(req.params.listingId, (err, data) => {

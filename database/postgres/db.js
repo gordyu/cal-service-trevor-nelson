@@ -86,14 +86,19 @@ const reset = () => {
 const create = function(row, table, callback) {
 	if (table === 'bnblist') {
 		var { id, listing_name, host_name, max_guests, listing_price } = row;
+		// console.log(row);
 		var listID = id || 'DEFAULT';
+		// console
+		// .log
+		// `INSERT INTO ${table} VALUES (${listID}, '${listing_name}', '${host_name}', ${max_guests}, ${listing_price})`
+		// ();
 		pool.query(
-			`INSERT INTO ${table} VALUES (${listID}, '${listing_name}', '${host_name}', ${max_guests}, ${listing_price})`,
+			`INSERT INTO ${table} VALUES (${listID}, '${listing_name}', '${host_name}', ${max_guests}, ${listing_price});`,
 			(err, resp) => {
-				if (err)
-					console.log('~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ error in pg create bookings'),
-						callback(err, null);
+				if (err) callback(err, null);
 				else {
+					// console.log('~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ error in pg create bookings', err),
+
 					callback(null, 'succes in adding to listings table.');
 					// console.log('------------------------------------');
 					// // console.log('succes in adding to listings table.');
