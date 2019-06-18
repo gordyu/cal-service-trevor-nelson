@@ -1,5 +1,5 @@
 require('newrelic');
-// process.env.NODE_ENV = 'production';
+process.env.NODE_ENV = 'production';
 
 const express = require('express');
 const db = require('../database/postgres/db.js');

@@ -2,9 +2,9 @@
 	"name": "sdc",
 	"script": "./server/server.js",
 	"env": {
-		"NODE_ENV": "production"
+		"NODE_ENV": "development"
 	},
-	"instances": 0,
+	"instances": 8,
 	"exec_mode": "cluster",
 	"merge_logs": true,
 	"error_file": "/var/log/sdc/error.log",
