@@ -1,0 +1,13 @@
+{
+	"name": "sdc",
+	"script": "./server/server.js",
+	"env": {
+		"NODE_ENV": "development"
+	},
+	"instances": 8,
+	"exec_mode": "cluster",
+	"merge_logs": true,
+	"error_file": "/var/log/sdc/error.log",
+	"out_file": "/var/log/sdc/out.log",
+	"log_date_format": "DD-MM-YYYY HH:mm:ss Z"
+}
