@@ -1,7 +1,7 @@
 require('newrelic');
 const { redisURL } = require('../config/keys.js');
 process.env.NODE_ENV = 'production';
-process.env.REDIS_URL = redisURL;
+// process.env.REDIS_URL = redisURL;
 
 const express = require('express');
 const db = require('../database/postgres/db.js');
@@ -9,9 +9,10 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const redis = require('redis');
 const responseTime = require('response-time');
-
+// console.log(process.env.REDIS_URL);
 const app = express();
 const REDIS_URL = process.env.REDIS_URL;
+// console.log(REDIS_URL);
 const client = redis.createClient(REDIS_URL);
 
 client.on('connect', () => {
