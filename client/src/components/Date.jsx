@@ -63,20 +63,15 @@ class CalDate extends React.Component {
 //this is kind of a shit show .. was what i was working on right up until presentations lmao
 
   render() {
-    console.log('TEST TEST TEST ' + new Date(this.props.bookedDates[0]).toISOString().split('T')[0])
-    console.log('INFO COMING IN FROM INDEX IS ' + this.props.bookedDates[0], this.props.bookedDates[1])
+ 
     let earliestDate = 0;
-    //OFFICIAL TESTING TAKING PLACE MESSING AROUND WITH TYPES AND MANIPULATING THEM
     let data = new Date(this.props.bookedDates[0]).toISOString().split('T')[0];
     let endData = new Date(this.props.bookedDates[1]).toISOString().split('T')[0];
-    // let daysAfter = (this.props.bookedDates[1] / (1000 * 60 * 60 * 24));
-    // console.log('DAYS THAT NEED TO BE BLOCKED AFTER ' + daysAfter)
-    //TEST SITE
+
 
     let lastFetchedDate = this.parseDate(data);
-    console.log('THIS IS THE DATE THAT GETS UNAVAILABLE?? ' + lastFetchedDate)
+  
 
-    console.log(this.props.startHolder)
     if (this.props.startHolder) {
       earliestDate = new Date(...this.props.startHolder.split('-'))
     }

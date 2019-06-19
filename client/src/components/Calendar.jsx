@@ -103,7 +103,7 @@ class Calendar extends React.Component {
     const day = date[2];
     this.leftOrRightCalendar();
     this.getFirstDay(year, month, day);
-    console.log('CALENDAR SHIT *** ' + (this.props))
+   
   }
 
   leftOrRightCalendar() {

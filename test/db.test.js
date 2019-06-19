@@ -119,9 +119,13 @@ describe("Update", ()=> {
 	})
 	it('Should be able to update one indiviual booking on the DB', (done) => {
 		db.editBooking(48, 0,{booking_start: '2016-06-06', booking_end: '2026-06-06', }, (err, data) => {
-		expect(JSON.stringify(data[0].booking_end)).to.equal('"2019-09-01T06:00:00.000Z"')
-
-			done()
+				data.map(booking => {
+					if(booking.record === 0) {
+					expect(JSON.stringify(booking.booking_end)).to.equal('"2019-09-01T06:00:00.000Z"')
+					done()
+					}
+				})
+			// done()
 		
 		} )
 	})

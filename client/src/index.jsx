@@ -79,17 +79,14 @@ class Booking extends React.Component {
 //
 
 initializeListing() {
-    fetch(`/api/listings/1/reservations`)
+    fetch(`/1`)
     .then(response => response.json())
     .then(response => {
-      console.log(JSON.stringify(response))
+      
       let clone = JSON.parse(JSON.stringify(response));
-      // let stringifiedClone = (JSON.stringify(response));
-      console.log(clone.reservations)
+
       var dateRange = this.getDaysInBetween(clone.reservations);
-      console.log('EXAMPLE BOOKED TUPLE ' + dateRange);
-      console.log(typeof dateRange);
-      console.log(dateRange.length)
+   
       this.setState({ bookedDates: dateRange })
     })
 }
@@ -98,14 +95,14 @@ initializeListing() {
   getDaysInBetween(reservationsArr) {
     // var outputArr = [];
     let tuple = [];
-    console.log('before millisecond conversion ' + reservationsArr[1].booking_start + 3)
+ 
     var starts = this.parseDate(reservationsArr[1].booking_start.split('T')[0]);
     var ends = this.parseDate(reservationsArr[1].booking_end.split('T')[0])
     var days = 1000 * 60 * 60 * 24 * reservationsArr[1].booking_duration;
-    console.log('days after start in milliseconds is ' + days);
+    
     tuple.push(starts);
     tuple.push(ends);
-    console.log('TUPLES IN MILLISECONDS ' + tuple);
+  
     return tuple;
   }
 
@@ -115,7 +112,7 @@ initializeListing() {
     let year = date[0];
     let month = date[1];
     let day = date[2];
-    console.log('dates before parseDate function are ' + year, month, day)
+   
     return new Date(year, month, day).getTime();
   }
 
@@ -160,7 +157,7 @@ initializeListing() {
 
   setEndDate(year, month, day) {
       this.endHolder =  year + '-' + month + '-' + day;
-      console.log('endHolder is ' + this.endHolder)
+    
   }
 
   submitDates() {

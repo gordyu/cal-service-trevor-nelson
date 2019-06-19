@@ -90,26 +90,36 @@ const serveBooking = (listingId, bookingId, callback) => {
  })
 };
 
-const editBooking  = (listingId, bookingId,  dates, callback) => {
+const editBooking  = (listingId, record,  dates, callback) => {
   serveBooking(listingId, null, (err, data) => {
     var original;
-    var spliced = data.filter(reservation => {
-      if(reservation.bookingId !== bookingId){
+    console.log('------------------------------------');
+    console.log(record);
+    console.log('------------------------------------');
+    var spliced = data.filter((reservation, index) => {
+      if(reservation.record === record.toString()){
         original = reservation;
       }
-      return reservation.record !== bookingId
+      return reservation.record !== record.toString()
     })
+    console.log('------------------------------------');
+    console.log(spliced)
+    console.log('------------------------------------');
     // var spliced = data.splice(bookingId-1, 1)
     // console.log(data)
     var obj = {}
     var sliced = Object.assign(obj, original)
     sliced.listing_id = listingId;
-    sliced.record = bookingId;
+    sliced.record = record;
     delete sliced.booking_start
     delete sliced.booking_end
     sliced.booking_end = dates.booking_end;
     sliced.booking_start = dates.booking_start;
     spliced.push(sliced);
+    console.log('------------------------------------');
+    console.log(spliced)
+    console.log('------------------------------------');
+
     editListing(listingId, {reservations: spliced}, (err, results)=>{
       if(err) callback(err, null)
       else {

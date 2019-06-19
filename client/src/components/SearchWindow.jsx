@@ -19,7 +19,6 @@ const Td = styled.td`
 `;
 
 const Th = styled.th`
-
   white-space: nowrap;
   padding: .7rem;
 `;
@@ -165,13 +164,14 @@ class SearchWindow extends React.Component {
     let displayStart = this.props.startHolder || this.props.startDate
     return (
       <Container>
-        <StyledTable>
-        <thead>
-            <Th>
+          <Th>
               <ListingHeader><H4>$234</H4><StyledBody> per night</StyledBody>
               </ListingHeader>
             </Th>
-          </thead>
+        <StyledTable>
+     
+         
+      
 <tr>
 <NormalHeader>
   <H5>Dates</H5>
