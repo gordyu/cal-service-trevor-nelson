@@ -1,5 +1,7 @@
 require('newrelic');
+const { redisURL } = require('./config/keys.js');
 process.env.NODE_ENV = 'production';
+process.env.REDIS_URL = redisURL;
 
 const express = require('express');
 const db = require('../database/postgres/db.js');

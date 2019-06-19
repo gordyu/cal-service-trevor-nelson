@@ -1,4 +1,6 @@
 'use strict';
+
+const { newRelicKey } = require('./config/keys.js');
 /**
  * New Relic agent configuration.
  *
