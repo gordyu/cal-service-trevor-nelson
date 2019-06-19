@@ -113,7 +113,7 @@ app.delete('/booking/:bookingId', (req, res) => {
 });
 // - -  - - -- - - - - - -- - - - - - -- - - - - - -- - - - - - --  - - - - -- - - - - - -
 
-const port = 3002;
+const port = 8080;
 const server = app.listen(port, () => {
 	console.log(`listening on port ${port}`);
 });
