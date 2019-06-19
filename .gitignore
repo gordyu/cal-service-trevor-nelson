@@ -1,3 +1,7 @@
 node_modules
 /database/postgres/SeedSilo
 /config
+newrelic_agent.log
+40064.0x
+40388.0x
+error.log
