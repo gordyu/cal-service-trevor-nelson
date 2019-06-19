@@ -1,5 +1,5 @@
 require('newrelic');
-const { redisURL } = require('./config/keys.js');
+const { redisURL } = require('../config/keys.js');
 process.env.NODE_ENV = 'production';
 process.env.REDIS_URL = redisURL;
 
