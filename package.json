@@ -4,7 +4,7 @@
 	"description": "original creator - @glofishh ",
 	"main": "index.js",
 	"scripts": {
-		"react-dev": "webpack -d --watch",
+		"react-dev": "webpack -p --config ./webpack.production.config.js",
 		"drop": "node ./database/postgres/drop.js",
 		"create": "node ./database/postgres/intialize.js",
 		"reset": "node ./database/postgres/reset.js",

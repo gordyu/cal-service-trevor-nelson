@@ -60,6 +60,7 @@ app.get('/:listingId', (req, res) => {
 		}
 	});
 });
+
 app.get('/:listingId/bookings', (req, res) => {
 	db.findListsBookings(req.params.listingId, (err, data) => {
 		if (err) console.log('error with serving listing', err);

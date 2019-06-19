@@ -8,17 +8,6 @@ module.exports = {
 		filename : 'bundle.js',
 		path     : DIST_DIR
 	},
-	resolve : {
-		root       : [
-			path.resolve('./src/frontend/utils'),
-			path.resolve('./src/frontend')
-		],
-		extensions : [
-			'',
-			'.js',
-			'.css'
-		]
-	},
 	module  : {
 		rules : [
 			{
