@@ -47,16 +47,16 @@ module.exports = function() {
 							console.log('------$-------------$----------$-------');
 							console.log('FileWrite complete for BOOKINGS @' + Date());
 							console.log('--$-----------$-------------$---------$-');
-							return db.dbLoader('bookings', seedFilePath, (err, data) => {
-								if (err) console.error(err);
-								else {
-									console.log('-!------!---!-------!-----!----!-------!--');
-									console.log('..............Loaded BOOKINGS into DB sucessfully @ ' + Date());
-									// BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS
-									console.log('----!--!----!----!- - - - !---!--!----!----!--');
-									return;
-								}
-							});
+							return; // db.dbLoader('bookings', seedFilePath, (err, data) => {
+							// 	if (err) console.error(err);
+							// 	else {
+							// 		console.log('-!------!---!-------!-----!----!-------!--');
+							// 		console.log('..............Loaded BOOKINGS into DB sucessfully @ ' + Date());
+							// 		// BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS
+							// 		console.log('----!--!----!----!- - - - !---!--!----!----!--');
+							// 		return;
+							// 	}
+							// });
 						}
 						// BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS
 						var { cust_name, host_id, booking_start, booking_end } = bookingCreate(n);

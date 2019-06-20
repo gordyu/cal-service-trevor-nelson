@@ -8,7 +8,7 @@
 		"drop": "node ./database/postgres/drop.js",
 		"create": "node ./database/postgres/intialize.js",
 		"reset": "node ./database/postgres/reset.js",
-		"seed": "node ./database/postgres/seeder.js",
+		"seed1": "node ./database/postgres/seeder-bnblist.js",
 		"start": "nodemon --ignore node_modules server/server.js",
 		"test": "mocha  test --watch",
 		"lint": "eslint ./"
