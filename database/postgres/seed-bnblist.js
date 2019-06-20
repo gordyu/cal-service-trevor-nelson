@@ -9,7 +9,7 @@ const db = require('./db.js');
 // LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS
 
 const words = require('./resources/airbnbwords.js');
-const seedFilePath = path.join(__dirname, './SeedSilo/seedFileListings.tsv');
+const seedFilePath = path.join(__dirname, './SeedSilo/seedFileListings.csv');
 // LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS
 var adjectivesLength = words.adjectives.length;
 var homesLength = words.homes.length;
@@ -63,7 +63,7 @@ module.exports = function() {
 						}
 
 						var { listing_name, host_name, max_guests, listing_price } = objCreate(n);
-						var inputString = `${n}\t${listing_name}\t${host_name}\t${max_guests}\t${listing_price}\n`;
+						var inputString = `${n},${listing_name},${host_name},${max_guests},${listing_price}\n`;
 						fs.write(fd, inputString, (err) => {
 							if (err) console.error(err);
 							recurser(n + 1);
