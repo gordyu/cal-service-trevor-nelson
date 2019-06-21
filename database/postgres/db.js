@@ -1,5 +1,5 @@
 const { Pool, Client } = require('pg');
-const { dbIP, dbIPPublic } = require('./SeedSilo/keys.js');
+const { dbIP, dbIPPublic, elasticIP } = require('./SeedSilo/keys.js');
 // process.env.DATABASE_URL = 'http://' + dbIP + ':5432/listings';
 // process.env.DATABASE_URL = dbIP + ':5432/listings';
 // process.env.DATABASE_URL = dbIP;
@@ -14,7 +14,7 @@ const { dbIP, dbIPPublic } = require('./SeedSilo/keys.js');
 
 const pool = new Pool({
 	user     : 'postgres',
-	host     : dbIPPublic,
+	host     : elasticIP,
 	database : 'listings',
 	port     : 5432
 });
