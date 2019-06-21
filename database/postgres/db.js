@@ -3,13 +3,20 @@ const { dbIP } = require('./SeedSilo/keys.js');
 // process.env.DATABASE_URL = 'http://' + dbIP + ':5432/listings';
 // process.env.DATABASE_URL = dbIP + ':5432/listings';
 // process.env.DATABASE_URL = dbIP;
-process.env.DATABASE_URL = dbIP + ':5432';
+// process.env.DATABASE_URL = dbIP + ':5432';
 // http://localhost:3002/
 
-const connectionString = process.env.DATABASE_URL;
-console.log(connectionString);
+// const connectionString = process.env.DATABASE_URL;
+// console.log(connectionString);
+// const pool = new Pool({
+// 	connectionString
+// });
+
 const pool = new Pool({
-	connectionString
+	user     : 'postgres',
+	host     : dbIP,
+	database : 'reviews',
+	port     : 5432
 });
 const createBookingTableString =
 	'CREATE TABLE bookings(id SERIAL PRIMARY KEY, cust_name VARCHAR (100) NOT NULL, host_id INTEGER REFERENCES bnbList(id),booking_start DATE NOT NULL, booking_end DATE NOT NULL)';
