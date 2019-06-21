@@ -230,12 +230,14 @@ const getbookingDates = (host_id, callback) => {
 };
 
 const join = (host_id, callback) => {
+	console.log('- - - - - - - - - - - - - -- - - - - join is firing');
 	// var start = Date.now();
 	pool.query(
 		`SELECT * FROM bookings INNER JOIN bnblist ON bnblist.id  = bookings.host_id WHERE host_id = ${host_id}`,
 		(err, data) => {
-			if (err) console.log(err), callback(err, null);
+			if (err) console.log(err), callback(err, null), console.log('- - - - - - - - - join errored');
 			else {
+				console.log('- - - - - - - - - - - - - -- - - - - join is suceeding');
 				// console.log('trevor');
 				// console.log(Date.now() - start);
 				callback(null, data.rows);
