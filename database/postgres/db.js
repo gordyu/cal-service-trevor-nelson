@@ -11,7 +11,7 @@ const { dbIP, dbIPPublic, elasticIP } = require('./SeedSilo/keys.js');
 // const pool = new Pool({
 // 	connectionString
 // });
-
+//thi is new
 const pool = new Pool({
 	user     : 'postgres',
 	host     : elasticIP,
