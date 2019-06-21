@@ -28,7 +28,7 @@ const createListingsTableString =
 const randomIndex = 1 + Math.floor(Math.random() * 3);
 
 const dbLoader = (table, filepath, callback) => {
-	pool.query(`COPY ${table} FROM '${filepath}';`, (err, resp) => {
+	pool.query(`COPY ${table} FROM ${filepath};`, (err, resp) => {
 		callback(err, resp);
 	});
 };
