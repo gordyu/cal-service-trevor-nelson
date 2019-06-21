@@ -1,5 +1,5 @@
 const db = require('./db');
-const seedFilePath = '/home/ubuntu/cal-service-trevor-nelson/config/seedFileListings.csv';
+const seedFilePath = '~/cal-service-trevor-nelson/config/seedFileListings.csv';
 
 db.dbLoader('bnblist', seedFilePath, (err, data) => {
 	if (err) console.error(err);

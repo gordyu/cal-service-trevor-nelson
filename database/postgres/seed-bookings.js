@@ -47,7 +47,8 @@ module.exports = function() {
 							console.log('------$-------------$----------$-------');
 							console.log('FileWrite complete for BOOKINGS @' + Date());
 							console.log('--$-----------$-------------$---------$-');
-							return; // db.dbLoader('bookings', seedFilePath, (err, data) => {
+							return;
+							// db.dbLoader('bookings', seedFilePath, (err, data) => {
 							// 	if (err) console.error(err);
 							// 	else {
 							// 		console.log('-!------!---!-------!-----!----!-------!--');

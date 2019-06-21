@@ -127,6 +127,7 @@ const create = function(row, table, callback) {
 		var { id, cust_name, host_id, booking_start, booking_end } = row;
 		var bookID = id || 'DEFAULT';
 		pool.query(
+			//INSERT INTO bookings VALUES (23000000, 'renterJoe', 250000000, '2015-03-03', '2016-03-03')`
 			`INSERT INTO ${table} VALUES (${bookID}, '${cust_name}', ${host_id}, '${booking_start}', '${booking_end}')`,
 			(err, resp) => {
 				if (err)
