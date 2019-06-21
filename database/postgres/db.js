@@ -1,8 +1,8 @@
 const { Pool, Client } = require('pg');
 const { dbIP } = require('./SeedSilo/keys.js');
-process.env.DATABASE_URL = dbIP + '/listings';
+process.env.DATABASE_URL = dbIP + ':5432/listings';
 
-const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/listings';
+const connectionString = process.env.DATABASE_URL;
 const pool = new Pool({
 	connectionString
 });
@@ -92,7 +92,7 @@ const create = function(row, table, callback) {
 		var listID = id || 'DEFAULT';
 		// console
 		// .log
-		// `INSERT INTO ${table} VALUES (${listID}, '${listing_name}', '${host_name}', ${max_guests}, ${listing_price})`
+		// `INSERT INTO bnblist VALUES (250000000, 'Tent on an IceRink', 'Hefty James Nelson', 12, 32)`
 		// ();
 		pool.query(
 			`INSERT INTO ${table} VALUES (${listID}, '${listing_name}', '${host_name}', ${max_guests}, ${listing_price});`,
