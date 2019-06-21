@@ -137,6 +137,6 @@ const server = app.listen(port, () => {
 	console.log(`listening on port ${port}`);
 });
 
-setTimeout(() => server, 5000);
+// setTimeout(() => server, 5000);
 
 module.exports = server;
