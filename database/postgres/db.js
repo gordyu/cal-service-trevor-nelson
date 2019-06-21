@@ -1,6 +1,6 @@
 const { Pool, Client } = require('pg');
 const { dbIP } = require('./SeedSilo/keys.js');
-process.env.DATABASE_URL = dbIP + ' :5432/listings';
+process.env.DATABASE_URL = dbIP + '/listings';
 
 const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/listings';
 const pool = new Pool({
