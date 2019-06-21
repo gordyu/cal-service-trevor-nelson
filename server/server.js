@@ -76,6 +76,7 @@ app.get('/:listingId', (req, res) => {
 		} else {
 			console.log('------------------------------------');
 			console.log('sending data from redis!');
+			console.log(cachedData);
 			console.log('------------------------------------');
 			res.send(cachedData);
 		}
