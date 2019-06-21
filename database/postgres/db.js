@@ -139,6 +139,7 @@ const find = function(table, key, value, callback) {
 			// console.log(Date.now() - startTime);
 			if (err) callback(err, null), console.log('~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ error in pg find');
 			else {
+				console.log('kinda working?');
 				callback('emty array was returned from find', null);
 			}
 		} else {
