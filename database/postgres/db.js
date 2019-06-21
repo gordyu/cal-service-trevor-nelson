@@ -170,10 +170,19 @@ const findListsBookings = (host_id, callback) => {
 	});
 };
 const findListingID = (number = randomIndex, callback) => {
+	console.log('------------------------------------');
+	console.log('findListingID is firing');
+	console.log('------------------------------------');
 	find('bnblist', 'id', number, (err, data) => {
 		if (err) {
+			console.log('------------------------------------');
+			console.log('findListingID is erroring');
+			console.log('------------------------------------');
 			callback(err, null);
 		} else {
+			console.log('------------------------------------');
+			console.log('findListingID is suceeding');
+			console.log('------------------------------------');
 			callback(null, data);
 		}
 	});

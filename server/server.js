@@ -1,5 +1,6 @@
 require('newrelic');
 const { redisURL } = require('../config/keys.js');
+const morgan = require('morgan');
 process.env.NODE_ENV = 'production';
 // process.env.REDIS_URL = redisURL;
 
@@ -11,6 +12,13 @@ const redis = require('redis');
 const responseTime = require('response-time');
 // console.log(process.env.REDIS_URL);
 const app = express();
+
+app.use(morgan('combined'));
+morgan('combined');
+morgan(':remote-addr :method :url');
+morgan(function(tokens, req, res) {
+	return req.method + ' ' + req.url;
+});
 const REDIS_URL = process.env.REDIS_URL;
 // console.log(REDIS_URL);
 const client = redis.createClient(REDIS_URL);
@@ -48,17 +56,27 @@ app.put('/:listingId', (req, res) => {
 });
 
 app.get('/:listingId', (req, res) => {
+	console.log('------------------------------------');
+	console.log('GET request to /listingID');
+	console.log('req.params.listingId: ', req.params.listingId);
+	console.log('------------------------------------');
 	client.get(`${req.params.listingId}`, (err, cachedData) => {
 		if (err) {
 			db.findListingID(req.params.listingId, (err, data) => {
 				if (err) console.log('error with serving listing', err);
 				else {
 					client.set(`${req.params.listingId}`, data, (err, data) => {
+						console.log('------------------------------------');
+						console.log('sending data!');
+						console.log('------------------------------------');
 						res.send(data);
 					});
 				}
 			});
 		} else {
+			console.log('------------------------------------');
+			console.log('sending data from redis!');
+			console.log('------------------------------------');
 			res.send(cachedData);
 		}
 	});
