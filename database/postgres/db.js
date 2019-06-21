@@ -15,9 +15,10 @@ const { dbIP } = require('./SeedSilo/keys.js');
 const pool = new Pool({
 	user     : 'postgres',
 	host     : dbIP,
-	database : 'reviews',
+	database : 'listings',
 	port     : 5432
 });
+
 const createBookingTableString =
 	'CREATE TABLE bookings(id SERIAL PRIMARY KEY, cust_name VARCHAR (100) NOT NULL, host_id INTEGER REFERENCES bnbList(id),booking_start DATE NOT NULL, booking_end DATE NOT NULL)';
 const createListingsTableString =
