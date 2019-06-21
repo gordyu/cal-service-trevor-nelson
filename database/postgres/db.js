@@ -1,6 +1,7 @@
 const { Pool, Client } = require('pg');
 const { dbIP } = require('./SeedSilo/keys.js');
-process.env.DATABASE_URL = 'http://' + dbIP + ':5432/listings';
+// process.env.DATABASE_URL = 'http://' + dbIP + ':5432/listings';
+process.env.DATABASE_URL = dbIP + ':5432/listings';
 // http://localhost:3002/
 
 const connectionString = process.env.DATABASE_URL;
