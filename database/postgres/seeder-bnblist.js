@@ -1,6 +1,6 @@
 const db = require('./db');
 const path = require('path');
-const seedFilePath = path.join(__dirname, './SeedSilo/seedFileListings.csv');
+const seedFilePath = './SeedSilo/seedFileListings.csv';
 
 db.dbLoader('bnblist', seedFilePath, (err, data) => {
 	if (err) console.error(err);
