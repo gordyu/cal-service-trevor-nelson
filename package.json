@@ -9,6 +9,7 @@
 		"create": "node ./database/postgres/intialize.js",
 		"reset": "node ./database/postgres/reset.js",
 		"seed1": "node ./database/postgres/seeder-bnblist.js",
+		"seed2": "node ./database/postgres/seeder-booking.js",
 		"start": "nodemon --ignore node_modules server/server.js",
 		"test": "mocha  test --watch",
 		"lint": "eslint ./"

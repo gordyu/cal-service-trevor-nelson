@@ -6,7 +6,7 @@ const db = require('./db.js');
 // BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS
 // BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS
 
-const seedFilePath = path.join(__dirname, './SeedSilo/seedFileBookings.tsv');
+const seedFilePath = path.join(__dirname, './SeedSilo/seedFileBookings.csv');
 // BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS
 // BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS
 // BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS
@@ -60,7 +60,7 @@ module.exports = function() {
 						}
 						// BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS
 						var { cust_name, host_id, booking_start, booking_end } = bookingCreate(n);
-						var inputString = `${n}\t${cust_name}\t${host_id}\t${booking_start}\t${booking_end}\n`;
+						var inputString = `${n},${cust_name},${host_id},${booking_start},${booking_end}\n`;
 						fs.write(fd, inputString, (err) => {
 							if (err) console.error(err);
 							recurser(n + 1);
