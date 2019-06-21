@@ -9,12 +9,12 @@ const { dbIP, dbIPPublic, elasticIP } = require('./SeedSilo/keys.js');
 // const connectionString = process.env.DATABASE_URL;
 // console.log(connectionString);
 // const pool = new Pool({
-// 	connectionString
+// 	connectionStringhttp://3.219.232.105/
 // });
 //thi is new
 const pool = new Pool({
 	user     : 'postgres',
-	host     : elasticIP,
+	host     : 'http://' + elasticIP,
 	database : 'listings',
 	port     : 5432
 });
