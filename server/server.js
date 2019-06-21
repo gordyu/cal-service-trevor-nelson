@@ -61,7 +61,7 @@ app.get('/:listingId', (req, res) => {
 	console.log('req.params.listingId: ', req.params.listingId);
 	console.log('------------------------------------');
 	client.get(`${req.params.listingId}`, (err, cachedData) => {
-		if (err) {
+		if (cachedData === null) {
 			db.findListingID(req.params.listingId, (err, data) => {
 				if (err) console.log('error with serving listing', err);
 				else {
