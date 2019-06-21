@@ -13,8 +13,9 @@ const { dbIP, dbIPPublic, elasticIP } = require('./SeedSilo/keys.js');
 // });
 //thi is new
 const pool = new Pool({
-	user     : 'postgres',
-	host     : 'http://' + elasticIP,
+	user     : 'trevor',
+	password : 'rasinbran',
+	host     : elasticIP,
 	database : 'listings',
 	port     : 5432
 });
