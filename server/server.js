@@ -66,6 +66,7 @@ app.get('/:listingId', (req, res) => {
 				if (err) console.log('error with serving listing', err);
 				else {
 					client.set(`${req.params.listingId}`, data, (err, data) => {
+						console.log(data);
 						console.log('------------------------------------');
 						console.log('sending data!');
 						console.log('------------------------------------');
