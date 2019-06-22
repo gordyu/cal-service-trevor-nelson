@@ -56,6 +56,10 @@ app.put('/:listingId', (req, res) => {
 });
 
 app.get('/:listingId', (req, res) => {
+	if (typeof req.params.listingId !== number) {
+		console.log(req.params.listingId);
+		return;
+	}
 	client.get(`${req.params.listingId}`, (err, cachedData) => {
 		if (cachedData !== null) {
 			res.send(cachedData);
