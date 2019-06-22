@@ -56,7 +56,7 @@ app.put('/:listingId', (req, res) => {
 });
 var numsOnly = /^[0-9]*$/gm;
 app.get('/:listingId', (req, res) => {
-	if (!numsOnly.test(req.params.listingId)) {
+	if (!numsOnly.test(req.params.listingId.trim())) {
 		console.log(req.params.listingId);
 		return;
 	}
