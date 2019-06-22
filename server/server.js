@@ -56,10 +56,6 @@ app.put('/id/:listingId', (req, res) => {
 });
 var numsOnly = /^[0-9]*$/gm;
 app.get('/id/:listingId', (req, res) => {
-	if (!numsOnly.test(req.params.listingId.trim())) {
-		console.log(req.params.listingId);
-		return;
-	}
 	client.get(`${req.params.listingId}`, (err, cachedData) => {
 		if (cachedData !== null) {
 			res.send(cachedData);
