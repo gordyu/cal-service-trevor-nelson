@@ -13,12 +13,12 @@ const responseTime = require('response-time');
 // console.log(process.env.REDIS_URL);
 const app = express();
 
-app.use(morgan('combined'));
-morgan('combined');
-morgan(':remote-addr :method :url');
-morgan(function(tokens, req, res) {
-	return req.method + ' ' + req.url;
-});
+// app.use(morgan('combined'));
+// morgan('combined');
+// morgan(':remote-addr :method :url');
+// morgan(function(tokens, req, res) {
+// 	return req.method + ' ' + req.url;
+// });
 const REDIS_URL = process.env.REDIS_URL;
 // console.log(REDIS_URL);
 const client = redis.createClient(REDIS_URL);
