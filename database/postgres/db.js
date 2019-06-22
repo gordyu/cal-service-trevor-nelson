@@ -21,7 +21,7 @@ const pool = new Pool({
 });
 
 const createBookingTableString =
-	'CREATE TABLE bookings(id SERIAL PRIMARY KEY, cust_name VARCHAR (100) NOT NULL, host_id INTEGER REFERENCES bnbList(id),booking_start DATE NOT NULL, booking_end DATE NOT NULL)';
+	'CREATE TABLE bookings(id SERIAL PRIMARY KEY, cust_name VARCHAR (100) NOT NULL, host_id INTEGER REFERENCES bnbList(id), booking_start DATE NOT NULL, booking_end DATE NOT NULL)';
 const createListingsTableString =
 	'CREATE TABLE bnbList(id serial PRIMARY KEY, listing_name VARCHAR (200) NOT NULL, host_name VARCHAR (100) NOT NULL, max_guests integer NOT NULL, listing_price integer NOT NULL)';
 
