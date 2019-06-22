@@ -1,6 +1,6 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
-const { elasticIPService } = require('./config/keys.js');
+const { elasticIPService } = require('./c');
 // import { mixedTypeAnnotation } from '@babel/types';
 
 export let options = {
