@@ -1,6 +1,6 @@
 require('newrelic');
 const { redisURL } = require('../config/keys.js');
-const morgan = require('morgan');
+// const morgan = require('morgan');
 process.env.NODE_ENV = 'production';
 // process.env.REDIS_URL = redisURL;
 
@@ -56,31 +56,18 @@ app.put('/:listingId', (req, res) => {
 });
 
 app.get('/:listingId', (req, res) => {
-	console.log('------------------------------------');
-	console.log('GET request to /listingID');
-	console.log('req.params.listingId: ', req.params.listingId);
-	console.log('------------------------------------');
 	client.get(`${req.params.listingId}`, (err, cachedData) => {
 		if (cachedData === null || cachedData === undefined) {
 			db.join(req.params.listingId, (err, data) => {
 				console.log('##### ----', data);
 				if (err) console.log('error with serving listing', err);
 				else {
-					client.set(`${req.params.listingId}`, JSON.stringify(data), (err, data) => {
-						console.log('$$$$- - - :', data);
-						console.log('------------------------------------');
-						console.log('sending data!');
-						console.log('------------------------------------');
-						res.send(data);
-					});
+					res.send(data);
+					client.set(`${req.params.listingId}`, JSON.stringify(data), (err, data) => {});
 				}
 			});
 			//
 		} else {
-			console.log('------------------------------------');
-			console.log('sending data from redis!');
-			console.log(cachedData);
-			console.log('------------------------------------');
 			res.send(JSON.parse(cachedData));
 		}
 	});
