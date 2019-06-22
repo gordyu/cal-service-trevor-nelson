@@ -66,7 +66,7 @@ app.get('/:listingId', (req, res) => {
 				console.log('##### ----', data);
 				if (err) console.log('error with serving listing', err);
 				else {
-					client.set(`${req.params.listingId}`, data, (err, data) => {
+					client.set(`${req.params.listingId}`, JSON.stringify(data), (err, data) => {
 						console.log('$$$$- - - :', data);
 						console.log('------------------------------------');
 						console.log('sending data!');
@@ -75,12 +75,13 @@ app.get('/:listingId', (req, res) => {
 					});
 				}
 			});
+			//
 		} else {
 			console.log('------------------------------------');
 			console.log('sending data from redis!');
 			console.log(cachedData);
 			console.log('------------------------------------');
-			res.send(cachedData);
+			res.send(JSON.parse(cachedData));
 		}
 	});
 });

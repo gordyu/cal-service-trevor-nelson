@@ -30,8 +30,7 @@ const bookingCreate = (i) => {
 }; // BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS
 
 // BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS
-
-module.exports = function() {
+const fun = function() {
 	fs.writeFile(seedFilePath, '', 'utf8', (err, data) => {
 		if (err) console.error(err);
 		else {
@@ -61,7 +60,7 @@ module.exports = function() {
 						}
 						// BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS
 						var { cust_name, host_id, booking_start, booking_end } = bookingCreate(n);
-						var inputString = `${n},${cust_name},${host_id},${booking_start},${booking_end}\n`;
+						var inputString = `${n}, ${cust_name}, ${host_id}, ${booking_start}, ${booking_end}\n`;
 						fs.write(fd, inputString, (err) => {
 							if (err) console.error(err);
 							recurser(n + 1);
@@ -73,3 +72,4 @@ module.exports = function() {
 		}
 	});
 }; // BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS BOOKINGS
+fun();

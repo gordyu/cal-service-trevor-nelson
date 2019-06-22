@@ -34,7 +34,7 @@ const objCreate = (i) => {
 // LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS
 
 // LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS
-module.exports = function() {
+const fun = function() {
 	fs.writeFile(seedFilePath, '', 'utf8', (err, data) => {
 		if (err) console.error(err);
 		else {
@@ -63,7 +63,7 @@ module.exports = function() {
 						}
 
 						var { listing_name, host_name, max_guests, listing_price } = objCreate(n);
-						var inputString = `${n},${listing_name},${host_name},${max_guests},${listing_price}\n`;
+						var inputString = `${n}, ${listing_name}, ${host_name}, ${max_guests}, ${listing_price}\n`;
 						fs.write(fd, inputString, (err) => {
 							if (err) console.error(err);
 							recurser(n + 1);
@@ -78,3 +78,5 @@ module.exports = function() {
 
 	// LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS LISTINGS
 };
+
+fun();
