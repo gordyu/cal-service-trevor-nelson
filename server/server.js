@@ -54,9 +54,9 @@ app.put('/:listingId', (req, res) => {
 		else res.status(200).send(data);
 	});
 });
-
+var numsOnly = /^[0-9]*$/gm;
 app.get('/:listingId', (req, res) => {
-	if (typeof req.params.listingId !== 'number') {
+	if (!numsOnly.test(req.params.listingId)) {
 		console.log(req.params.listingId);
 		return;
 	}
