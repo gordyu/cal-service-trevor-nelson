@@ -56,7 +56,7 @@ app.put('/:listingId', (req, res) => {
 });
 
 app.get('/:listingId', (req, res) => {
-	if (typeof req.params.listingId !== number) {
+	if (typeof req.params.listingId !== 'number') {
 		console.log(req.params.listingId);
 		return;
 	}
