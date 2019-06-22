@@ -1,5 +1,6 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
+const { elasticIPService } = require('./config/keys.js');
 // import { mixedTypeAnnotation } from '@babel/types';
 
 export let options = {
@@ -19,11 +20,12 @@ export default function() {
 	// const params = {
 	// 	headers : { 'Content-Type': 'application/json' }
 	// };
+
 	let randomID = 900000 + Math.floor(Math.random() * 99999);
 	// var input = JSON.stringify(payload);
 	// let randomID = 900000 + Math.floor(Math.random() * 99000);
 	// let res = http.post(`http://localhost:3002/`, input, params);
-	let res = http.get(`http://localhost:3002/${randomID}`);
+	let res = http.get(`http://${elasticIPService}/${randomID}`);
 	check(res, {
 		sucess : (r) => r.status == 200
 	});
