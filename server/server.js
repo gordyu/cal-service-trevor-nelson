@@ -57,18 +57,14 @@ app.put('/:listingId', (req, res) => {
 
 app.get('/:listingId', (req, res) => {
 	client.get(`${req.params.listingId}`, (err, cachedData) => {
-		if (cachedData === null || cachedData === undefined) {
-			db.join(req.params.listingId, (err, data) => {
-				// console.log('##### ----', data);
-				if (err) console.log('error with serving listing', err);
-				else {
-					res.send(data);
-					client.set(`${req.params.listingId}`, JSON.stringify(data), (err, data) => {});
-				}
-			});
-			//
+		if (cachedData !== null) {
+			res.send(cachedData);
 		} else {
-			res.send(JSON.parse(cachedData));
+			db.join(req.params.listingId, (err, data) => {
+				if (data)
+					res.send(data), client.set(`${req.params.listingId}`, JSON.stringify(data), (err, data) => {});
+				if (err) console.log('error with serving listing', err);
+			});
 		}
 	});
 });

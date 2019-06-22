@@ -4,9 +4,8 @@ const { elasticIPService } = require('./config/keys.js');
 // import { mixedTypeAnnotation } from '@babel/types';
 
 export let options = {
-	vus      : 100,
-	duration : '45s',
-	rps      : 1
+	vus      : 40,
+	duration : '5m'
 };
 
 export default function() {
