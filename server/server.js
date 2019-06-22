@@ -59,7 +59,7 @@ app.get('/:listingId', (req, res) => {
 	client.get(`${req.params.listingId}`, (err, cachedData) => {
 		if (cachedData === null || cachedData === undefined) {
 			db.join(req.params.listingId, (err, data) => {
-				console.log('##### ----', data);
+				// console.log('##### ----', data);
 				if (err) console.log('error with serving listing', err);
 				else {
 					res.send(data);

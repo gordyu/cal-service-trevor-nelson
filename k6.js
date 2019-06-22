@@ -5,7 +5,7 @@ const { elasticIPService } = require('./config/keys.js');
 
 export let options = {
 	vus      : 40,
-	duration : '4s'
+	duration : '40s'
 };
 
 export default function() {
