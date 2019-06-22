@@ -25,7 +25,7 @@ export default function() {
 	// var input = JSON.stringify(payload);
 	// let randomID = 900000 + Math.floor(Math.random() * 99000);
 	// let res = http.post(`http://localhost:3002/`, input, params);
-	let res = http.get(`http://${elasticIPService}/${randomID}`);
+	let res = http.get(`http://${elasticIPService}/id/${randomID}`);
 	check(res, {
 		sucess : (r) => r.status == 200
 	});

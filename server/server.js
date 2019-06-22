@@ -48,14 +48,14 @@ app.post('/', (req, res) => {
 	});
 });
 
-app.put('/:listingId', (req, res) => {
+app.put('/id/:listingId', (req, res) => {
 	db.update(req.body, 'bnblist', 'id', req.params.listingId, (err, data) => {
 		if (err) console.log('error in app.PUT (main)'), res.status(404).send('failure!');
 		else res.status(200).send(data);
 	});
 });
 var numsOnly = /^[0-9]*$/gm;
-app.get('/:listingId', (req, res) => {
+app.get('/id/:listingId', (req, res) => {
 	if (!numsOnly.test(req.params.listingId.trim())) {
 		console.log(req.params.listingId);
 		return;
@@ -73,7 +73,7 @@ app.get('/:listingId', (req, res) => {
 	});
 });
 
-app.get('/:listingId/bookings', (req, res) => {
+app.get('/id/:listingId/bookings', (req, res) => {
 	db.findListsBookings(req.params.listingId, (err, data) => {
 		if (err) console.log('error with serving listing', err);
 		else {
@@ -81,7 +81,7 @@ app.get('/:listingId/bookings', (req, res) => {
 		}
 	});
 });
-app.delete('/:listingId', (req, res) => {
+app.delete('/id/:listingId', (req, res) => {
 	db.remove('bnblist', 'id', req.params.listingId, (err, data) => {
 		if (err) console.log('error in app.DELETE (main)'), res.status(404).send('failure!');
 		else console.log('sucessful deleting post'), res.status(200).send('deleted 1 listing');
@@ -90,7 +90,7 @@ app.delete('/:listingId', (req, res) => {
 // - -  - - -- - - - - - -- - - - - - -- - - - - - -- - - - - - --  - - - - -- - - - - - -
 
 //booking (dates) routes - - - - - -- - - - - - -- - - - - - -- - - - - - -- - - - - - --
-app.post('/booking/:listingId', (req, res) => {
+app.post('/id/booking/:listingId', (req, res) => {
 	var newBooking = req.body;
 	newBooking.host_id = req.params.listingId;
 	newBooking.id = false;
@@ -100,21 +100,21 @@ app.post('/booking/:listingId', (req, res) => {
 	});
 });
 
-app.put('/booking/:bookingId', (req, res) => {
+app.put('/id/booking/:bookingId', (req, res) => {
 	db.update(req.body, 'bookings', 'id', req.params.bookingId, (err, data) => {
 		if (err) console.log('error in app.PUT (edit reservation)'), res.status(404).send(err);
 		else console.log('sucessful booking put'), res.status(200).send(data);
 	});
 });
 
-app.get('/booking/:bookingId', (req, res) => {
+app.get('/id/booking/:bookingId', (req, res) => {
 	db.findBookingID(req.params.bookingId, (err, data) => {
 		if (err) console.log('error in app.get (edit reservation)'), res.status(404).send('failure!');
 		else console.log('sucessful booking get'), res.status(200).send(data);
 	});
 });
 
-app.delete('/booking/:bookingId', (req, res) => {
+app.delete('/id/booking/:bookingId', (req, res) => {
 	db.remove('bookings', 'id', req.params.bookingId, (err, data) => {
 		if (err) console.log('error in app.get (edit reservation)'), res.status(404).send('failure!');
 		else console.log('sucessful booking get'), res.status(200).send('deleted 1 bookingId');
